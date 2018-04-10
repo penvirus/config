@@ -1,8 +1,10 @@
 #!/bin/sh
 
-alias ls="ls --color -F"
+alias ll="ls -GFal"
+alias ls="ls -GF"
 alias ssh="ssh -A"
 alias tmux="tmux -f ${HOME}/bin/tmux.conf"
+alias less="less -X"
 
 if [ -n "${SSH_AUTH_SOCK}" -a -e "${SSH_AUTH_SOCK}" ]; then
 	rm -f ${HOME}/bin/ssh_auth_sock
@@ -18,10 +20,9 @@ PS1="\[\033[1;32m\]\H\[\033[0m\]"
 PS1="$PS1 \[\033[1;34m\]\W\[\033[0m\]"
 PS1="$PS1 \[\033[1;31m\]-\u- (=^_^=)\[\033[0m\] "
 export PS1
+export LSCOLORS=ExFxBxDxCxegedabagacad
 
 cm ()
 {
-	    curl -s -o - http://whatthecommit.com/ | sed -n '/<p>.*/p' | cut -d'>' -f2
+	curl -s -o - http://whatthecommit.com/ | sed -n '/<p>.*/p' | cut -d'>' -f2
 }
-
-export LC_ALL="en_US.UTF-8"
