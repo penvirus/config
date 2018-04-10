@@ -1,7 +1,13 @@
 #!/bin/sh
 
-alias ll="ls -GFal"
-alias ls="ls -GF"
+platform=$(uname -s)
+if [ "$platform" = "Linux" ]; then
+	alias ll="ls -Fal --color"
+	alias ls="ls -F --color"
+elif [ "$platform" = "Darwin" ]; then
+	alias ll="ls -GFal"
+	alias ls="ls -GF"
+fi
 alias ssh="ssh -A"
 alias tmux="tmux -f ${HOME}/bin/tmux.conf"
 alias less="less -X"
