@@ -22,7 +22,7 @@ PS1="$PS1 \[\033[1;31m\]-\u- (=^_^=)\[\033[0m\] "
 export PS1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
-cm ()
+cm()
 {
 	curl -s -o - http://whatthecommit.com/ | sed -n '/<p>.*/p' | cut -d'>' -f2
 }
