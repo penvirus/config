@@ -1,5 +1,7 @@
 #!/bin/sh
 
+platform=$(uname -s)
+
 distribute()
 {
 	cp -r vim ${HOME}/.vim
@@ -9,7 +11,11 @@ distribute()
 	cp bashrc ${HOME}/bin/
 	cp tmux.conf ${HOME}/bin/
 
-	sed -i '' /gg_config_gg/d ${HOME}/.bashrc
+	if [ "$platform" = "Linux" ]; then
+		sed -i /gg_config_gg/d ${HOME}/.bashrc
+	elif [ "$platform" = "Darwin" ]; then
+		sed -i '' /gg_config_gg/d ${HOME}/.bashrc
+	fi
 	echo '. ${HOME}/bin/bashrc #gg_config_gg' >> ${HOME}/.bashrc
 }
 
