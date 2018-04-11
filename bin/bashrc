@@ -1,6 +1,7 @@
 #!/bin/sh
 
 platform=$(uname -s)
+
 if [ "$platform" = "Linux" ]; then
 	alias ll="ls -Fal --color"
 	alias ls="ls -F --color"
@@ -13,12 +14,12 @@ alias tmux="tmux -f ${HOME}/bin/tmux.conf"
 alias less="less -X"
 
 if [ -n "${SSH_AUTH_SOCK}" -a -e "${SSH_AUTH_SOCK}" ]; then
-	rm -f ${HOME}/bin/ssh_auth_sock
-	ln -sf ${SSH_AUTH_SOCK} ${HOME}/bin/ssh_auth_sock
+	rm -f ${HOME}/ssh_auth_sock
+	ln -sf ${SSH_AUTH_SOCK} ${HOME}/ssh_auth_sock
 fi
 
 if [ -n "${TMUX}" ]; then
-	export SSH_AUTH_SOCK=${HOME}/bin/ssh_auth_sock
+	export SSH_AUTH_SOCK=${HOME}/ssh_auth_sock
 fi
 
 export LS_COLORS="no=00:fi=00:di=01;34:ln=00;36:pi=40;33:so=00;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:ex=00;32:*.sh=00;32:*.tar=00;31:*.tgz=00;31:*.zip=00;31:*.gz=00;31:*.bz2=00;31:*.bz=00;31:"
