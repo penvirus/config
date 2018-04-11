@@ -1,1 +1,1 @@
-comments in the project are all bullshit, never mind
+comments in the project are all bullshit (from http://whatthecommit.com/)
