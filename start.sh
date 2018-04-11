@@ -17,6 +17,8 @@ distribute()
 		sed -i '' /gg_config_gg/d ${HOME}/.bashrc
 	fi
 	echo '. ${HOME}/bin/bashrc #gg_config_gg' >> ${HOME}/.bashrc
+
+	cp gitconfig ${HOME}/.gitconfig
 }
 
 collect()

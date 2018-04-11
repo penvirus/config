@@ -1,0 +1,19 @@
+[user]
+	name = Tzung-Bi Shih
+	email = penvirus@gmail.com
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[push]
+	default = simple
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
+[alias]
+	st = status
+	df = difftool
