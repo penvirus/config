@@ -12,6 +12,13 @@ distribute()
 	cp -r bin ${HOME}/bin
 
 	if [ "$platform" = "Linux" ]; then
+		ln -s ${HOME}/bin/jq-linux64 ${HOME}/bin/jq
+	elif [ "$platform" = "Darwin" ]; then
+		ln -s ${HOME}/bin/jq-osx-amd64 ${HOME}/bin/jq
+	fi
+	chmod u+x ${HOME}/bin/jq
+
+	if [ "$platform" = "Linux" ]; then
 		sed -i /gg_config_gg/d ${HOME}/.bashrc
 	elif [ "$platform" = "Darwin" ]; then
 		sed -i '' /gg_config_gg/d ${HOME}/.bashrc
