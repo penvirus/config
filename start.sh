@@ -4,12 +4,12 @@ platform=$(uname -s)
 
 distribute()
 {
+	rm -rf ${HOME}/.vim
 	cp -r vim ${HOME}/.vim
 	cp vimrc ${HOME}/.vimrc
 
-	mkdir -p ${HOME}/bin
-	cp bashrc ${HOME}/bin/
-	cp tmux.conf ${HOME}/bin/
+	rm -rf ${HOME}/bin
+	cp -r bin ${HOME}/bin
 
 	if [ "$platform" = "Linux" ]; then
 		sed -i /gg_config_gg/d ${HOME}/.bashrc
