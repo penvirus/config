@@ -485,6 +485,8 @@ augroup cplusplus
         set tabstop=8
         set noexpandtab
 
+	set tags=./tags,../tags,../../tags,../../../tags,../../../../tags
+
         " None of these should be word dividers, so make them not be
         set iskeyword+=_,@,#
 
