@@ -25,6 +25,15 @@ distribute()
 	fi
 	echo '. ${HOME}/bin/bashrc #gg_config_gg' >> ${HOME}/.bashrc
 
+	# because of login shell
+	if [ "$platform" = "Darwin" ]; then
+		if [ -f ${HOME}/.profile ]; then
+			sed -i '' /gg_config_gg/d ${HOME}/.profile
+		fi
+
+		echo '. ${HOME}/bin/bashrc #gg_config_gg' >> ${HOME}/.profile
+	fi
+
 	cp gitconfig ${HOME}/.gitconfig
 }
 
