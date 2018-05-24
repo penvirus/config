@@ -28,19 +28,4 @@ distribute()
 	cp gitconfig ${HOME}/.gitconfig
 }
 
-collect()
-{
-	sleep 1
-}
-
-if [ -z "$1" ]; then
-	echo "$0 [0 | 1]"
-	echo "  0: distribute"
-	echo "  1: collect"
-else
-	if [ "$1" -eq 0 ]; then
-		distribute
-	else
-		collect
-	fi
-fi
+distribute
