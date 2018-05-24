@@ -505,7 +505,7 @@ augroup cplusplus
 
         syntax match ErrorLeadSpace /^ \+/      " highlight any leading spaces
         syntax match ErrorTailSpace / \+$/      " highlight any trailing spaces
-        "match Error80               /\%>80v.\+/ " highlight anything past 80 in red
+        match Error80               /\%>80v.\+/ " highlight anything past 80 in red
 	
 	if has("cscope")
 	    nmap <LEADER>s :cs find s <C-R>=expand("<cword>")<CR><CR>	
