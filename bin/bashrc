@@ -10,7 +10,7 @@ elif [ "$platform" = "Darwin" ]; then
 	alias ls="ls -GF"
 fi
 alias ssh="ssh -A"
-alias tmux="tmux -f ${HOME}/bin/tmux.conf"
+alias tmux="tmux -f ${HOME}/bin/tmux.conf -2"
 alias less="less -X"
 
 if [ -n "${SSH_AUTH_SOCK}" -a -e "${SSH_AUTH_SOCK}" ]; then
