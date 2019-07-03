@@ -10,8 +10,9 @@ elif [ "$platform" = "Darwin" ]; then
 	alias ls="ls -GF"
 fi
 alias ssh="ssh -A"
-alias tmux="tmux -f ${HOME}/bin/tmux.conf -2"
+alias tmux="tmux -f ${HOME}/bin/tmux.conf"
 alias less="less -X"
+alias cs="rm -f cscope.out; cscope -Rkb"
 
 if [ -n "${SSH_AUTH_SOCK}" -a -e "${SSH_AUTH_SOCK}" ]; then
 	rm -f ${HOME}/ssh_auth_sock
@@ -32,4 +33,17 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 cm()
 {
 	curl -s -o - http://whatthecommit.com/ | sed -n '/<p>.*/p' | cut -d'>' -f2
+}
+
+rssh()
+{
+	host="$1"
+	cmd="$2"
+
+	while true;
+	do
+		ssh -t "$host" "$cmd"
+		echo -n '.'
+		sleep 0.1
+	done
 }
