@@ -49,3 +49,7 @@ rssh()
 		sleep 0.1
 	done
 }
+
+for f in $(/bin/ls -1 rcs/); do
+	. rcs/${f}
+done
