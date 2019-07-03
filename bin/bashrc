@@ -14,6 +14,8 @@ alias tmux="tmux -f ${HOME}/bin/tmux.conf"
 alias less="less -X"
 alias cs="rm -f cscope.out; cscope -Rkb"
 
+umask 022
+
 if [ -n "${SSH_AUTH_SOCK}" -a -e "${SSH_AUTH_SOCK}" ]; then
 	rm -f ${HOME}/ssh_auth_sock
 	ln -sf ${SSH_AUTH_SOCK} ${HOME}/ssh_auth_sock
