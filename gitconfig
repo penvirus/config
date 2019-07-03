@@ -17,3 +17,10 @@
 [alias]
 	st = status
 	df = difftool
+	lo = log --oneline
+[color]
+	ui = auto
+[branch]
+	autosetuprebase = always
+[pager]
+       show = diff-so-fancy | less --tabs=8 -RFX
