@@ -25,6 +25,7 @@
 	default = simple
 [tig]
 	diff-highlight = true
+	tab-size = 8
 [user]
 	name = Tzung-Bi Shih
 	email = penvirus@gmail.com
