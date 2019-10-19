@@ -13,6 +13,7 @@ alias ssh="ssh -A"
 alias tmux="tmux -f ${HOME}/bin/tmux.conf"
 alias less="less -X"
 alias cs="rm -f cscope.out; cscope -Rkb"
+alias tig="tig --all -1000"
 
 umask 022
 
