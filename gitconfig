@@ -24,3 +24,5 @@
 	autosetuprebase = always
 [pager]
        show = diff-so-fancy | less --tabs=8 -RFX
+[tig]
+	diff-highlight = true
