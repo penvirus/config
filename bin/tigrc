@@ -3,6 +3,8 @@ set tab-size = 8
 set diff-highlight = true
 
 # bind  keymap key action
+bind generic f move-page-down
+bind generic b move-page-up
 bind generic g move-first-line
 bind generic G move-last-line
 
