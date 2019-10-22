@@ -18,7 +18,7 @@ color           title-blur              231             57
 color           line-number             150             default
 color           id                      150             default
 color           date                    150             default
-color           author                  45              default       bold
+color           author                  45              default
 # diff-view
 color           'Refs: '                160             default
 color           'Author: '              45              default
