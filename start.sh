@@ -35,6 +35,8 @@ distribute()
 	fi
 
 	cp gitconfig ${HOME}/.gitconfig
+
+	echo 'source ~/bin/tigrc' >${HOME}/.tigrc
 }
 
 distribute
