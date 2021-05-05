@@ -49,6 +49,6 @@ rssh() {
 	done
 }
 
-for f in ${HOME}/bin/rcs/*; do
+for f in ${HOME}/bin/rcs/*\.sh; do
 	. "${f}"
 done
