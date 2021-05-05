@@ -3,107 +3,56 @@ package DiffHighlight;
 use 5.008;
 use warnings FATAL => 'all';
 use strict;
-
-# Use the correct value for both UNIX and Windows (/dev/null vs nul)
-use File::Spec;
-
-my $NULL = File::Spec->devnull();
+use Encode;
 
 # Highlight by reversing foreground and background. You could do
 # other things like bold or underline if you prefer.
 our @OLD_HIGHLIGHT = (
-	color_config('color.diff-highlight.oldnormal',    "\e[1;31m"),
-	color_config('color.diff-highlight.oldhighlight', "\e[1;31;48;5;52m"),
+	color_config('color.diff-highlight.oldnormal'),
+	color_config('color.diff-highlight.oldhighlight', "\x1b[7m"),
 	"\x1b[27m",
 );
-our @NEW_HIGHLIGHT = (
-	color_config('color.diff-highlight.newnormal',    "\e[1;32m"),
-	color_config('color.diff-highlight.newhighlight', "\e[1;32;48;5;22m"),
+our@NEW_HIGHLIGHT = (
+	color_config('color.diff-highlight.newnormal', $OLD_HIGHLIGHT[0]),
+	color_config('color.diff-highlight.newhighlight', $OLD_HIGHLIGHT[1]),
 	$OLD_HIGHLIGHT[2],
 );
-
-
 
 my $RESET = "\x1b[m";
 my $COLOR = qr/\x1b\[[0-9;]*m/;
 my $BORING = qr/$COLOR|\s/;
 
+# The patch portion of git log -p --graph should only ever have preceding | and
+# not / or \ as merge history only shows up on the commit line.
+my $GRAPH = qr/$COLOR?\|$COLOR?\s+/;
+
 my @removed;
 my @added;
 my $in_hunk;
-my $graph_indent = 0;
 
 our $line_cb = sub { print @_ };
 our $flush_cb = sub { local $| = 1 };
 
-# Count the visible width of a string, excluding any terminal color sequences.
-sub visible_width {
-	local $_ = shift;
-	my $ret = 0;
-	while (length) {
-		if (s/^$COLOR//) {
-			# skip colors
-		} elsif (s/^.//) {
-			$ret++;
-		}
-	}
-	return $ret;
-}
-
-# Return a substring of $str, omitting $len visible characters from the
-# beginning, where terminal color sequences do not count as visible.
-sub visible_substr {
-	my ($str, $len) = @_;
-	while ($len > 0) {
-		if ($str =~ s/^$COLOR//) {
-			next
-		}
-		$str =~ s/^.//;
-		$len--;
-	}
-	return $str;
-}
-
 sub handle_line {
-	my $orig = shift;
-	local $_ = $orig;
-
-	# match a graph line that begins a commit
-	if (/^(?:$COLOR?\|$COLOR?[ ])* # zero or more leading "|" with space
-	         $COLOR?\*$COLOR?[ ]   # a "*" with its trailing space
-	      (?:$COLOR?\|$COLOR?[ ])* # zero or more trailing "|"
-	                         [ ]*  # trailing whitespace for merges
-	    /x) {
-	        my $graph_prefix = $&;
-
-		# We must flush before setting graph indent, since the
-		# new commit may be indented differently from what we
-		# queued.
-		flush();
-		$graph_indent = visible_width($graph_prefix);
-
-	} elsif ($graph_indent) {
-		if (length($_) < $graph_indent) {
-			$graph_indent = 0;
-		} else {
-			$_ = visible_substr($_, $graph_indent);
-		}
-	}
+	local $_ = shift;
 
 	if (!$in_hunk) {
-		$line_cb->($orig);
-		$in_hunk = /^$COLOR*\@\@ /;
+		$line_cb->($_);
+		$in_hunk = /^$GRAPH*$COLOR*\@\@ /;
 	}
-	elsif (/^$COLOR*-/) {
-		push @removed, $orig;
+	elsif (/^$GRAPH*$COLOR*-/) {
+		push @removed, $_;
 	}
-	elsif (/^$COLOR*\+/) {
-		push @added, $orig;
+	elsif (/^$GRAPH*$COLOR*\+/) {
+		push @added, $_;
 	}
 	else {
-		flush();
-		$line_cb->($orig);
-		$in_hunk = /^$COLOR*[\@ ]/;
+		show_hunk(\@removed, \@added);
+		@removed = ();
+		@added = ();
+
+		$line_cb->($_);
+		$in_hunk = /^$GRAPH*$COLOR*[\@ ]/;
 	}
 
 	# Most of the time there is enough output to keep things streaming,
@@ -123,8 +72,6 @@ sub flush {
 	# Flush any queued hunk (this can happen when there is no trailing
 	# context in the final diff of the input).
 	show_hunk(\@removed, \@added);
-	@removed = ();
-	@added = ();
 }
 
 sub highlight_stdin {
@@ -141,7 +88,7 @@ sub highlight_stdin {
 # fallback, which means we will work even if git can't be run.
 sub color_config {
 	my ($key, $default) = @_;
-	my $s = `git config --get-color $key 2>$NULL`;
+	my $s = `git config --get-color $key 2>/dev/null`;
 	return length($s) ? $s : $default;
 }
 
@@ -175,6 +122,7 @@ sub show_hunk {
 sub highlight_pair {
 	my @a = split_line(shift);
 	my @b = split_line(shift);
+	my $opts = shift();
 
 	# Find common prefix, taking care to skip any ansi
 	# color codes.
@@ -219,9 +167,18 @@ sub highlight_pair {
 		}
 	}
 
+	my @OLD_COLOR_SPEC = @OLD_HIGHLIGHT;
+	my @NEW_COLOR_SPEC = @NEW_HIGHLIGHT;
+
+	# If we're only highlight the differences temp disable the old/new normal colors
+	if ($opts->{'only_diff'}) {
+		$OLD_COLOR_SPEC[0] = '';
+		$NEW_COLOR_SPEC[0] = '';
+	}
+
 	if (is_pair_interesting(\@a, $pa, $sa, \@b, $pb, $sb)) {
-		return highlight_line(\@a, $pa, $sa, \@OLD_HIGHLIGHT),
-		       highlight_line(\@b, $pb, $sb, \@NEW_HIGHLIGHT);
+		return highlight_line(\@a, $pa, $sa, \@OLD_COLOR_SPEC),
+		       highlight_line(\@b, $pb, $sb, \@NEW_COLOR_SPEC);
 	}
 	else {
 		return join('', @a),
@@ -234,8 +191,8 @@ sub highlight_pair {
 # or "+"
 sub split_line {
 	local $_ = shift;
-	return utf8::decode($_) ?
-		map { utf8::encode($_); $_ }
+	return eval { $_ = Encode::decode('UTF-8', $_, 1); 1 } ?
+		map { Encode::encode('UTF-8', $_) }
 			map { /$COLOR/ ? $_ : (split //) }
 			split /($COLOR+)/ :
 		map { /$COLOR/ ? $_ : (split //) }
@@ -280,8 +237,8 @@ sub is_pair_interesting {
 	my $suffix_a = join('', @$a[($sa+1)..$#$a]);
 	my $suffix_b = join('', @$b[($sb+1)..$#$b]);
 
-	return visible_substr($prefix_a, $graph_indent) !~ /^$COLOR*-$BORING*$/ ||
-	       visible_substr($prefix_b, $graph_indent) !~ /^$COLOR*\+$BORING*$/ ||
+	return $prefix_a !~ /^$GRAPH*$COLOR*-$BORING*$/ ||
+	       $prefix_b !~ /^$GRAPH*$COLOR*\+$BORING*$/ ||
 	       $suffix_a !~ /^$BORING*$/ ||
 	       $suffix_b !~ /^$BORING*$/;
 }
