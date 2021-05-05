@@ -29,3 +29,14 @@
 [user]
 	name = Tzung-Bi Shih
 	email = penvirus@gmail.com
+[color "diff-highlight"]
+	oldNormal = blue bold
+	oldHighlight = blue bold 52
+	newNormal = yellow bold
+	newHighlight = yellow bold 22
+[color "diff"]
+	meta = yellow
+	commit = white
+	old = blue bold
+	new = yellow bold
+	whitespace = red reverse
