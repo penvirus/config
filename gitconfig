@@ -5,7 +5,7 @@
 [branch]
 	autosetuprebase = always
 [color]
-	ui = auto
+	ui = true
 [core]
 	editor = vim
 [diff]
@@ -35,8 +35,10 @@
 	newNormal = yellow bold
 	newHighlight = yellow bold 22
 [color "diff"]
-	meta = yellow
-	commit = white
+	meta = white
+	frag = white dim
+	func = white dim
+	commit = yellow
 	old = blue bold
 	new = yellow bold
 	whitespace = red reverse
