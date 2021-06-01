@@ -10,6 +10,7 @@ _wait_host() {
 	echo -n "waiting ${host} ${exp}..."
 	while eval ${e}; do
 		echo -n '.'
+		sleep 1
 	done
 	echo "done"
 }
