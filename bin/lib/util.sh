@@ -1,36 +1,36 @@
-_wait_host() {
-	local host=$1
-	local exp=$2
-	local e="ping -q -c 1 -W 1 ${host} >/dev/null"
+# Wait as long as the evaluation statement is True.
+# @eval_state: the evaluation statement
+wait_as_long_as() {
+	local eval_state="$1"
 
-	if [ "${exp}" = "up" ]; then
-		e="! ${e}"
-	fi
-
-	echo -n "waiting ${host} ${exp}..."
-	while eval ${e}; do
+	while eval ${eval_state}; do
 		echo -n '.'
 		sleep 1
 	done
-	echo "done"
 }
 
 wait_host_up() {
-	local host=$1
+	local host_ip="$1"
 
-	if [ -z "${host}" ]; then
+	if [ -z "${host_ip}" ]; then
 		return 1
 	fi
 
-	_wait_host "${host}" "up"
+	local e="! ping -q -c 1 -W 1 ${host_ip} >/dev/null"
+
+	echo -n "waiting ${host_ip} up..."
+	wait_as_long_as "${e}"
 }
 
 wait_host_down() {
-	local host=$1
+	local host_ip="$1"
 
-	if [ -z "${host}" ]; then
+	if [ -z "${host_ip}" ]; then
 		return 1
 	fi
 
-	_wait_host "${host}" "down"
+	local e="ping -q -c 1 -W 1 ${host_ip} >/dev/null"
+
+	echo -n "waiting ${host_ip} down..."
+	wait_as_long_as "${e}"
 }
