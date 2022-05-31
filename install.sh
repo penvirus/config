@@ -11,6 +11,9 @@ distribute()
 	rm -rf ${HOME}/bin
 	cp -r bin ${HOME}/bin
 
+	rm -rf ${HOME}/.gnupg
+	cp -r gpg ${HOME}/.gnupg
+
 	if [ "$platform" = "Linux" ]; then
 		ln -s ${HOME}/bin/jq-linux64 ${HOME}/bin/jq
 	elif [ "$platform" = "Darwin" ]; then
