@@ -2,12 +2,17 @@
 	st = status
 	df = difftool
 	lo = log --oneline
+	fix = log --oneline --pretty=fixes -n 1
+	findt = log --oneline -n 1 --grep
 [branch]
 	autosetuprebase = always
 [color]
 	ui = true
 [core]
 	editor = vim
+	abbrev = 12
+[pretty]
+	fixes = Fixes: %h (\"%s\")
 [diff]
 	tool = vimdiff
 [difftool]
