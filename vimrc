@@ -709,3 +709,6 @@ nnoremap <F6> :call TBS()<CR>
 command! Rb normal! iReviewed-by: Tzung-Bi Shih <tzungbi@kernel.org><LF><ESC>
 command! Tb normal! iTested-by: Tzung-Bi Shih <tzungbi@kernel.org><LF><ESC>
 command! Ab normal! iAcked-by: Tzung-Bi Shih <tzungbi@kernel.org><LF><ESC>
+
+source ~/.vim/osc52.vim
+nnoremap <LEADER>c :call SendViaOSC52(getreg())<CR>
