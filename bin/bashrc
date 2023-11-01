@@ -49,6 +49,13 @@ rssh() {
 	done
 }
 
+p() {
+	for sha in $@;
+	do
+		git show $sha | git patch-id --stable
+	done
+}
+
 for f in ${HOME}/bin/rcs/*\.sh; do
 	. "${f}"
 done
