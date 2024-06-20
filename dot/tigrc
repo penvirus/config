@@ -1,0 +1,41 @@
+# set   variable = value
+set tab-size = 8
+set diff-highlight = true
+
+# bind  keymap key action
+bind generic f move-page-down
+bind generic b move-page-up
+bind generic g move-first-line
+bind generic G move-last-line
+
+# color area fgcolor bgcolor [attributes]
+# See: http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+#               area                    fg              bg            [attr]
+# ==========================================================================
+# General
+color           default                 252             default
+color           cursor                  15              235           bold
+color           title-focus             231             57
+color           title-blur              231             57
+color           line-number             150             default
+color           id                      150             default
+color           date                    150             default
+color           author                  45              default
+# diff-view
+color           'Refs: '                160             default
+color           'Author: '              45              default
+color           'AuthorDate: '          226             default
+color           'Commit: '              45              default
+color           'CommitDate: '          226             default
+color           '    Signed-off-by'     226             default
+color           '    Acked-by'          226             default
+color           '    Tested-by'         226             default
+color           '    Reviewed-by'       226             default
+color           diff-header             default         default
+color           diff-stat               default         default
+color           diff-index              default         default
+color           '--- '                  45              default
+color           '+++ '                  45              default
+color           '@@ '                   default         default
+color           diff-add                190             default
+color           diff-del                160             default

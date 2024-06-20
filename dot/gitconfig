@@ -1,0 +1,55 @@
+[alias]
+	st = status
+	df = difftool
+	lo = log --oneline
+	fix = log --oneline --pretty=fixes -n 1
+	c = log --oneline --pretty=c -n 1
+	findt = log --oneline -n 1 --grep
+[branch]
+	autosetuprebase = always
+[color]
+	ui = true
+[core]
+	editor = vim
+	abbrev = 12
+[pretty]
+	fixes = Fixes: %h (\"%s\")
+	c = %h (\"%s\")
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
+[pager]
+	show = diff-so-fancy | less --tabs=8 -RFX
+[pull]
+	rebase = true
+[push]
+	default = simple
+[tig]
+	diff-highlight = true
+	tab-size = 8
+[user]
+	name = Tzung-Bi Shih
+	email = penvirus@gmail.com
+[color "diff-highlight"]
+	oldNormal = blue bold
+	oldHighlight = blue bold 52
+	newNormal = yellow bold
+	newHighlight = yellow bold 22
+[color "diff"]
+	meta = white
+	frag = white dim
+	func = white dim
+	commit = yellow
+	old = blue bold
+	new = yellow bold
+	whitespace = red reverse
+[rerere]
+	enabled = false
+[init]
+	defaultBranch = main
