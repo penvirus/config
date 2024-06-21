@@ -64,6 +64,14 @@ install_tig()
 	cp --preserve=all dot/tigrc "${HOME}/.tigrc"
 }
 
+install_mutt()
+{
+	cp --preserve=all dot/muttrc "${HOME}/.muttrc"
+
+	rm -rf "${HOME}/.mutt"
+	cp -r --preserve=all dot/mutt "${HOME}/.mutt"
+}
+
 install_i3()
 {
 	rm -rf "${HOME}/.config/i3"
@@ -96,6 +104,7 @@ distribute()
 	install_gpg
 	install_git
 	install_tig
+	install_mutt
 
 	install_i3
 	install_alacritty
