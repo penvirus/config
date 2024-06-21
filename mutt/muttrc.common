@@ -1,0 +1,60 @@
+ignore * # ignore all headers except for ...
+unignore Date: From: To: CC: Bcc: Subject:
+
+# Specific key bindings.
+bind generic    \Cf     next-page
+bind generic    \Cb     previous-page
+bind generic    f       next-page
+bind generic    b       previous-page
+bind generic    gg      first-entry
+bind generic    G       last-entry
+bind generic    zt      current-top
+bind generic    zz      current-middle
+bind generic    zb      current-bottom
+
+bind index      \Cf     next-page
+bind index      \Cb     previous-page
+bind index      f       next-page
+bind index      b       previous-page
+bind index      gg      first-entry
+bind index      G       last-entry
+bind index      <up>    previous-entry
+bind index      <down>  next-entry
+bind index      za      collapse-thread
+bind index      zA      collapse-all
+bind index      R       group-reply
+bind index      /       search-reverse
+bind index      <ESC>r  recall-message
+
+bind pager      \Cf     next-page
+bind pager      \Cb     previous-page
+bind pager      f       next-page
+bind pager      b       previous-page
+bind pager      gg      top
+bind pager      G       bottom
+bind pager      <up>    previous-line
+bind pager      <down>  next-line
+bind pager      k       previous-line
+bind pager      j       next-line
+bind pager      {       previous-thread
+bind pager      }       next-thread
+bind pager      <left>  previous-entry
+bind pager      <right> next-entry
+bind pager      R       group-reply
+
+# index
+color indicator bold color15 color235
+color status brightblue black
+# pager
+color header brightyellow black "^(Subject)"
+color body white black ".*"
+
+# Patch syntax highlighting
+color body brightyellow black ^(Signed-off-by).*
+color body brightyellow black ^(Reviewed-by).*
+color body brightyellow black ^(Tested-by).*
+color body brightyellow black "^[\+][^\+]+.*"
+color body brightyellow black "^[\+]$"
+color body brightblue black "^[\-][^\-]+.*"
+color body brightblue black "^[\-]$"
+#color body brightmagenta black "^@@ .*"

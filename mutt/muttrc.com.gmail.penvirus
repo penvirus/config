@@ -1,0 +1,55 @@
+unset hostname
+
+set from="penvirus@gmail.com"
+set realname="Tzung-Bi Shih"
+
+set folder="imaps://imap.gmail.com:993"
+set spoolfile="+INBOX"
+set postponed="+[Gmail]/Drafts"
+set trash='=[Gmail]/Bin'
+set copy=no
+set move=no
+unset record
+
+set index_format="%8Z %-10{%b %d} %-30.30L %s"
+#set sort="threads"
+#set strict_threads="yes"
+set editor=vim
+set wrap_search=no
+
+# Header cache, to speed things up.
+set header_cache = ${HOME}/.mutt/com.gmail.penvirus/header_cache
+set message_cachedir = ${HOME}/.mutt/com.gmail.penvirus/message_cache
+set certificate_file = ${HOME}/.mutt/com.gmail.penvirus/certificates
+
+# IMAP fine-tuning.
+unset imap_passive
+set imap_check_subscribed
+set mail_check=60
+
+unset imap_authenticators
+unset imap_oauth_refresh_command
+set imap_user="penvirus@gmail.com"
+set imap_pass="REPLACE_ME"
+
+unset smtp_authenticators
+unset smtp_oauth_refresh_command
+set ssl_starttls=yes
+set smtp_url="smtp://penvirus@gmail.com@smtp.gmail.com:587"
+set smtp_pass="REPLACE_ME"
+
+macro index     a       "<enter-command>unset trash\n<delete-message>" "Gmail archive message"
+macro index     d       "<enter-command>set trash=\"=[Gmail]/Bin\"\n<delete-message>" "Gmail delete message"
+macro index     gi      "<change-folder>=INBOX<enter>" "Go to inbox"
+macro index     gd      "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
+macro index     gm      "<change-folder>=Garbage/mailing-list<enter>" "Go to mailing-list"
+macro index     gma     "<change-folder>=Garbage/mailing-list/alsa-devel<enter>" "Go to mailing-list/alsa-devel"
+macro index     gmw     "<change-folder>=Garbage/mailing-list/linux-watchdog<enter>" "Go to mailing-list/linux-watchdog"
+macro index     gmc     "<change-folder>=Garbage/mailing-list/platform-chrome<enter>" "Go to mailing-list/platform-chrome"
+macro index     gb      "<change-folder>=Garbage/bugs<enter>" "Go to bugs"
+
+macro pager     a       "<enter-command>unset trash\n<delete-message><next-undeleted>" "Gmail archive message"
+macro pager     d       "<enter-command>set trash=\"=[Gmail]/Bin\"\n<delete-message><next-undeleted>" "Gmail delete message"
+
+source ~/.mutt/muttrc.common
+source ~/.mutt/muttrc.gpg

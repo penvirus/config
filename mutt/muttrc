@@ -1,0 +1,13 @@
+# Folder hooks
+folder-hook 'com.gmail.penvirus' 'source ~/.mutt/muttrc.com.gmail.penvirus'
+folder-hook 'com.gmail.tzungbi' 'source ~/.mutt/muttrc.com.gmail.tzungbi'
+
+# Default account
+source ~/.mutt/muttrc.com.gmail.tzungbi
+
+# Macros for switching accounts
+macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/muttrc.com.gmail.penvirus<enter><change-folder>!<enter>'
+macro index <f4> '<sync-mailbox><enter-command>source ~/.mutt/muttrc.com.gmail.tzungbi<enter><change-folder>!<enter>'
+
+# Fetch mail shortcut
+#bind index G imap-fetch-mail
