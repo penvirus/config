@@ -41,6 +41,9 @@ exec --no-startup-id nm-applet
 # Set auto-repeat
 exec_always --no-startup-id xset r rate 200 40
 
+# Enable ibus
+exec_always --no-startup-id ibus-daemon -dr
+
 # Use pactl to adjust volume in PulseAudio or PipeWire.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
