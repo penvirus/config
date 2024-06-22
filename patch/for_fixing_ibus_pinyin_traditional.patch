@@ -1,0 +1,27 @@
+--- a/usr/share/ibus-pinyin/setup/main.py 2024-06-22 07:51:50.980979663 +0800
++++ b/usr/share/ibus-pinyin/setup/main.py 2024-06-22 08:03:46.600596691 +0800
+@@ -109,7 +109,7 @@
+         self.__init_full_punct = self.__builder.get_object("InitFullPunct")
+         self.__init_half_punct = self.__builder.get_object("InitHalfPunct")
+         self.__init_simp = self.__builder.get_object("InitSimplifiedChinese")
+-        self.__init_trad = self.__builder.get_object("IniTraditionalChinese")
++        self.__init_trad = self.__builder.get_object("InitTraditionalChinese")
+ 
+         # UI
+         self.__lookup_table_page_size = self.__builder.get_object("LookupTablePageSize")
+@@ -120,6 +120,7 @@
+         self.__init_full.set_active(self.__get_value("InitFull", False))
+         self.__init_full_punct.set_active(self.__get_value("InitFullPunct", True))
+         self.__init_simp.set_active(self.__get_value("InitSimplifiedChinese", True))
++        self.__init_trad.set_active(self.__get_value("InitTraditionalChinese", True))
+         self.__lookup_table_orientation.set_active(self.__get_value("LookupTableOrientation", 0))
+         self.__lookup_table_page_size.set_value(self.__get_value("LookupTablePageSize", 5))
+ 
+@@ -128,6 +129,7 @@
+         self.__init_full.connect("toggled", self.__toggled_cb, "InitFull")
+         self.__init_full_punct.connect("toggled", self.__toggled_cb, "InitFullPunct")
+         self.__init_simp.connect("toggled", self.__toggled_cb, "InitSimplifiedChinese")
++        self.__init_trad.connect("toggled", self.__toggled_cb, "InitTraditionalChinese")
+ 
+         def __lookup_table_page_size_changed_cb(adjustment):
+             self.__set_value("LookupTablePageSize", int(adjustment.get_value()))
