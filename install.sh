@@ -49,9 +49,10 @@ install_vim()
 
 install_gpg()
 {
-	rm -rf "${HOME}/.gnupg"
-	cp -r --preserve=all dot/gpg "${HOME}/.gnupg"
-	chmod 700 "${HOME}/.gnupg"
+	mkdir -p "${HOME}/.gnupg"
+	cp --preserve=all dot/gpg/gpg-agent.conf "${HOME}/.gnupg/"
+	cp --preserve=all dot/gpg/gpg.conf "${HOME}/.gnupg/"
+	chmod -R 700 "${HOME}/.gnupg"
 }
 
 install_git()
