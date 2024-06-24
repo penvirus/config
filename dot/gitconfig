@@ -53,3 +53,10 @@
 	enabled = false
 [init]
 	defaultBranch = main
+[sendemail]
+	smtpserver = mail.kernel.org
+	smtpserverport = 465
+	smtpencryption = ssl
+	from = tzungbi@kernel.org
+	smtpuser = tzungbi
+	smtppass = REPLACE_ME
