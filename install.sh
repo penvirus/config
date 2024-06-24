@@ -73,6 +73,13 @@ install_mutt()
 	cp -r --preserve=all dot/mutt "${HOME}/.mutt"
 }
 
+install_ssh()
+{
+	mkdir -p "${HOME}/.ssh"
+	chmod 700 "${HOME}/.ssh"
+	cp --preserve=all dot/ssh_config "${HOME}/.ssh/config"
+}
+
 install_i3()
 {
 	rm -rf "${HOME}/.config/i3"
@@ -106,6 +113,7 @@ distribute()
 	install_git
 	install_tig
 	install_mutt
+	install_ssh
 
 	install_i3
 	install_alacritty
