@@ -52,6 +52,7 @@ install_gpg()
 	mkdir -p "${HOME}/.gnupg"
 	cp --preserve=all dot/gpg/gpg-agent.conf "${HOME}/.gnupg/"
 	cp --preserve=all dot/gpg/gpg.conf "${HOME}/.gnupg/"
+	cp --preserve=all dot/gpg/sshcontrol "${HOME}/.gnupg/"
 	chmod -R 700 "${HOME}/.gnupg"
 }
 
