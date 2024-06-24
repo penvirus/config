@@ -33,9 +33,9 @@ unset smtp_authenticators
 unset smtp_oauth_refresh_command
 set ssl_starttls=yes
 #set smtp_url="smtp://tzungbi@gmail.com@smtp.gmail.com:587"
-set smtp_url= "smtps://tzungbi@mail.kernel.org:465/"
+set smtp_url="smtps://tzungbi@mail.kernel.org:465/"
 set smtp_pass="REPLACE_ME"
-set from= "tzungbi@kernel.org"
+set from="tzungbi@kernel.org"
 
 macro index     a       "<enter-command>unset trash\n<delete-message>" "Gmail archive message"
 macro index     d       "<enter-command>set trash=\"=[Gmail]/Trash\"\n<delete-message>" "Gmail delete message"
