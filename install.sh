@@ -97,6 +97,7 @@ install_alacritty()
 	git clone https://github.com/alacritty/alacritty-theme "${HOME}/.config/alacritty/themes"
 
 	cp --preserve=all dot/alacritty.toml "${HOME}/.alacritty.toml"
+	cp --preserve=all dot/alacritty.yml "${HOME}/.alacritty.yml"
 }
 
 install_touchpad()
