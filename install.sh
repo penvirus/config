@@ -107,6 +107,17 @@ install_touchpad()
 	fi
 }
 
+install_libinput_gestures()
+{
+	# usermod -a -G input $USER
+	# apt install wmctrl xdotool libinput-tools
+	rm -rf "${HOME}/bin/libinput-gestures"
+	mkdir -p "${HOME}/bin/libinput-gestures"
+	git clone https://github.com/bulletmark/libinput-gestures.git "${HOME}/bin/libinput-gestures"
+
+	cp --preserve=all dot/libinput-gestures.conf "${HOME}/.libinput-gestures.conf"
+}
+
 distribute()
 {
 	install_bin
@@ -120,6 +131,7 @@ distribute()
 	install_i3
 	install_alacritty
 	install_touchpad
+	install_libinput_gestures
 }
 
 distribute

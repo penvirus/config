@@ -47,6 +47,9 @@ exec_always --no-startup-id xset m 22/10 0
 # Enable ibus
 exec_always --no-startup-id ibus-daemon -dr
 
+# Enable libinput-gestures.
+exec_always --no-startup-id $HOME/bin/libinput-gestures/libinput-gestures -c $HOME/.libinput-gestures.conf
+
 # Use pactl to adjust volume in PulseAudio or PipeWire.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
