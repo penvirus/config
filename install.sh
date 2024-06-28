@@ -103,7 +103,7 @@ install_alacritty()
 install_touchpad()
 {
 	if [ -d /etc/X11/xorg.conf.d/ ]; then
-		sudo cp --preserve=all touchpad/90-touchpad.conf /etc/X11/xorg.conf.d/
+		sudo cp --preserve=all rules/90-touchpad.conf /etc/X11/xorg.conf.d/
 	fi
 }
 
