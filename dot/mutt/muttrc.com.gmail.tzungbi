@@ -37,14 +37,5 @@ set smtp_url="smtps://tzungbi@mail.kernel.org:465/"
 set smtp_pass="REPLACE_ME"
 set from="Tzung-Bi Shih <tzungbi@kernel.org>"
 
-macro index     gi      "<change-folder>=INBOX<enter>" "Go to inbox"
-macro index     gd      "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
-macro index     gm      "<change-folder>=mailing-lists<enter>" "Go to mailing-list"
-macro index     gma     "<change-folder>=mailing-lists/alsa-devel<enter>" "Go to mailing lists/alsa-devel"
-macro index     gmw     "<change-folder>=mailing-lists/linux-watchdog<enter>" "Go to mailing lists/linux-watchdog"
-macro index     gmc     "<change-folder>=mailing-lists/chrome-platform<enter>" "Go to mailing lists/platform-chrome"
-macro index     gmk     "<change-folder>=mailing-lists/linux-kselftest<enter>" "Go to mailing lists/linux-kselftest"
-macro index     gmm     "<change-folder>=mailing-lists/linux-mm<enter>" "Go to mailing lists/linux-mm"
-
 source ~/.mutt/muttrc.common
 source ~/.mutt/muttrc.gpg
