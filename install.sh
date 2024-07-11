@@ -118,6 +118,12 @@ install_libinput_gestures()
 	cp --preserve=all dot/libinput-gestures.conf "${HOME}/.libinput-gestures.conf"
 }
 
+install_known_tools()
+{
+	sudo apt update
+	sudo apt install -y vim tmux tig mutt i3 alacritty brightnessctl pulseaudio-utils
+}
+
 distribute()
 {
 	install_bin
@@ -132,6 +138,8 @@ distribute()
 	install_alacritty
 	install_touchpad
 	install_libinput_gestures
+
+	install_known_tools
 }
 
 distribute
