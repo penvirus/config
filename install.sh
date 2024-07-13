@@ -122,7 +122,8 @@ install_known_tools()
 {
 	sudo apt update
 	sudo apt install -y vim tmux tig mutt i3 alacritty brightnessctl \
-		pulseaudio-utils wmctrl xdotool libinput-tools ibus-libpinyin
+		pulseaudio-utils wmctrl xdotool libinput-tools ibus-libpinyin \
+		ripgrep
 }
 
 distribute()
