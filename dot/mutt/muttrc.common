@@ -47,6 +47,7 @@ color indicator bold color15 color235
 color status brightblue black
 # pager
 color header brightyellow black "^(Subject)"
+color header brightyellow black "^(Message-ID)"
 color body white black ".*"
 
 # Patch syntax highlighting
