@@ -5,6 +5,7 @@
 	fix = log --oneline --pretty=fixes -n 1
 	c = log --oneline --pretty=c -n 1
 	findt = log --oneline -n 1 --grep
+	in = tag --contains
 [branch]
 	autosetuprebase = always
 [color]
