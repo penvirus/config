@@ -66,7 +66,7 @@ hi TabLine        cterm=NONE ctermfg=232 ctermbg=189
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Content Highlight
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-hi Comment        cterm=NONE ctermfg=63 ctermbg=NONE
+hi Comment        cterm=NONE ctermfg=105 ctermbg=NONE
 
 hi Constant       cterm=NONE ctermfg=215 ctermbg=NONE
 hi String         cterm=NONE ctermfg=215 ctermbg=235
