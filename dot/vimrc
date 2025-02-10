@@ -1,17 +1,10 @@
-"
-" Note:
-"   For Windows:
-"     1. rename .vimrc to _vimrc
-"     2. rename .vim/ to vimfiles/
-"
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Get out of VI's compatible mode
 set nocompatible
 
-" Sets how many lines of history VIM have to remember
+" Set how many lines of history VIM have to remember
 set history=200
 
 " Set to auto read when a file is changed from the outside
@@ -41,10 +34,6 @@ set termencoding=utf-8
 
 " Treat ambiguous width as double width (ONLY work for unicode encoding)
 set ambiwidth=double
-
-if has("win32") || has("win64")
-    language english
-endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fileformats
@@ -120,44 +109,19 @@ set showfulltag
 " How many tenths of a second to blink (Bracket blinking)
 set mat=2
 
-" Windows size
-if has("gui_running")
-    set columns=120
-    set lines=60
-endif
-
 " Enable syntax highlighting
 syntax enable
 
     """"""""""""""""""""""""""""""
     " Colors and Fonts
     """"""""""""""""""""""""""""""
-    if has("gui_running")
-        if has("win32") || has("win64")
-            set guifont=Monaco:h10
-        elseif has("mac") || has("macunix")
-            set guifont=Monaco:h14
-        endif
-
-        set guioptions-=T
-        set background=dark
-        colorscheme ir_black
-
-        if has("gui_macvim")
-            set transparency=10
-        endif
+    if &term == "xterm-color" || &term == "xterm-16color"
+        set t_Co=16
+        colorscheme vimos
     else
-        if &term == "xterm-color" || &term == "xterm-16color"
-            " Set the color level
-            set t_Co=16
-            colorscheme vimos
-        else
-            " Set the color level
-            set t_Co=256
-            colorscheme vimos256
-        endif
+        set t_Co=256
+        colorscheme vimos256
     endif
-    nmap <LEADER>r :colorscheme vimos256<CR>
 
     """"""""""""""""""""""""""""""
     " Cursor line
@@ -177,7 +141,7 @@ syntax enable
     """"""""""""""""""""""""""""""
     " Status line
     """"""""""""""""""""""""""""""
-    " Always hide the status line
+    " Always show the status line
     set laststatus=2
 
     set statusline=%<%f%<%h%m%r\ \ %(\*%Y\*\ \ LineNr=%l\/%L\ \ Col=%03c%)\ \ \%P\*
@@ -267,9 +231,6 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General Abbrevs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Comment for C like languages
-"autocmd BufNewFile,BufRead *.js,*.htc,*.c,*.tmpl,*.css inoremap $c /**<CR>  **/<ESC>O
-
 " Bash like
 cnoremap <C-B> <HOME>
 cnoremap <C-E> <END>
@@ -348,41 +309,6 @@ nnoremap <LEADER>q :QFix<CR>
 " Plug-in configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     """"""""""""""""""""""""""""""
-    " Taglist
-    """"""""""""""""""""""""""""""
-    " 自動更新目前的 tag 列表
-    let Tlist_Auto_Update = 1
-
-    " 顯示的 tag 排序方式：name/order
-    let Tlist_Sort_Type = "name"
-
-    " Tlist 視窗的寬度
-    let Tlist_WinWidth = 50
-
-    " 是否只顯示目前文件的 tag
-    let Tlist_Show_One_File = 0
-
-    " 關閉文件的同時，也關閉taglist視窗
-    let Tlist_Exit_OnlyWindow = 1
-
-    let Tlist_Use_SingleClick = 1
-
-    " Tlist window at the right side
-    let Tlist_Use_Right_Window = 1
-
-    " Automatically close the folds for the non-active files
-    let Tlist_File_Fold_Auto_Close = 1
-
-    " Process files even when the taglist window is not open
-    let Tlist_Process_File_Always = 1
-
-    " Enable fold column to display the folding for the tag tree
-    let Tlist_Enable_Fold_Column = 0
-
-    " hot key
-    nnoremap <F3> :TlistToggle<CR>
-
-    """"""""""""""""""""""""""""""
     " Cscope
     """"""""""""""""""""""""""""""
     if has("cscope")
@@ -402,47 +328,6 @@ nnoremap <LEADER>q :QFix<CR>
         "endif
     endif
 
-    """"""""""""""""""""""""""""""
-    " OmniCppComplete
-    """"""""""""""""""""""""""""""
-    map <F6> :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-
-    """"""""""""""""""""""""""""""
-    " YankRing
-    """"""""""""""""""""""""""""""
-    let g:yankring_history_dir = "$HOME/.vim/temp/"
-
-    """"""""""""""""""""""""""""""
-    " SmoothPageScroll
-    """"""""""""""""""""""""""""""
-    "if !has("gui_running")
-    "    let g:smooth_page_scroll_delay = 2
-    "    nmap <C-F> :call SmoothPageScrollDown()<CR>
-    "    nmap <C-B> :call SmoothPageScrollUp()<CR>
-    "endif
-
-    """"""""""""""""""""""""""""""
-    " Ku
-    """"""""""""""""""""""""""""""
-    nnoremap <Leader>kb :<C-u>Ku buffer<Return>
-    nnoremap <Leader>kf :<C-u>Ku file<Return>
-
-    """"""""""""""""""""""""""""""
-    " CSApprox.vim
-    """"""""""""""""""""""""""""""
-    let g:CSApprox_verbose_level = 0
-
-    """"""""""""""""""""""""""""""
-    " CompView
-    """"""""""""""""""""""""""""""
-    map <unique> <Leader>/ <Plug>CompView
-
-    """"""""""""""""""""""""""""""
-    " zendcoding
-    """"""""""""""""""""""""""""""
-    let g:user_zen_expandabbr_key = '<C-k>'
-    let g:use_zen_complete_tag = 1
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -458,23 +343,10 @@ noremap <F2> :%s/\s*$//g<CR>:noh<CR>''
 " Visual Tab
 set listchars=tab:>-,trail:-,eol:$,nbsp:%,extends:>,precedes:<
 
-" Fast Big5 Mode
-noremap <LEADER>b :e ++enc=big5<CR>:set tenc=big5<CR>:set fenc=big5<CR>
-
-" When editing a file, always jump to the last known cursor position.
-" Don’t do it when the position is invalid or when inside an event handle
-autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \     execute "normal g`\"" |
-    \ endif
-
 " Quick window resize
 nnoremap + <C-W>+
 nnoremap - <C-W>-
 nnoremap = <C-W>=
-
-" Bind number increment (Screen use it!!)
-noremap <C-E> <C-A>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Group setting
@@ -488,7 +360,7 @@ augroup cplusplus
         set tabstop=8
         set noexpandtab
 
-	set tags=./tags,../tags,../../tags,../../../tags,../../../../tags
+        set tags=./tags,../tags,../../tags,../../../tags,../../../../tags
 
         " None of these should be word dividers, so make them not be
         set iskeyword+=_,@,#
@@ -508,19 +380,18 @@ augroup cplusplus
 
         syntax match ErrorLeadSpace /^ \+/      " highlight any leading spaces
         syntax match ErrorTailSpace / \+$/      " highlight any trailing spaces
-        match Error100              /\%>100v.\+/ " highlight anything past 80 in red
-	
-	if has("cscope")
-	    nmap <LEADER>s :cs find s <C-R>=expand("<cword>")<CR><CR>	
-	    nmap <LEADER>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
-	    nmap <LEADER>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
-	    nmap <LEADER>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
-	    nmap <LEADER>e :cs find e <C-R>=expand("<cword>")<CR><CR>	
-	    nmap <LEADER>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
-	    nmap <LEADER>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-	    nmap <LEADER>d :cs find d <C-R>=expand("<cword>")<CR><CR>	
-	endif
-
+        match Error100              /\%>100v.\+/ " highlight anything past 100 in red
+        
+        if has("cscope")
+            nmap <LEADER>s :cs find s <C-R>=expand("<cword>")<CR><CR>   
+            nmap <LEADER>g :cs find g <C-R>=expand("<cword>")<CR><CR>   
+            nmap <LEADER>c :cs find c <C-R>=expand("<cword>")<CR><CR>   
+            nmap <LEADER>t :cs find t <C-R>=expand("<cword>")<CR><CR>   
+            nmap <LEADER>e :cs find e <C-R>=expand("<cword>")<CR><CR>   
+            nmap <LEADER>f :cs find f <C-R>=expand("<cfile>")<CR><CR>   
+            nmap <LEADER>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+            nmap <LEADER>d :cs find d <C-R>=expand("<cword>")<CR><CR>   
+        endif
 
         " Support more C-related types
         syntax keyword cType uint ubyte ulong uint64_t uint32_t uint16_t uint8_t boolean_t int64_t int32_t int16_t int8_t u_int64_t u_int32_t u_int16_t u_int8_t
@@ -574,34 +445,6 @@ augroup cplusplus
     autocmd BufEnter *.c,*.h,*.cpp,*.hpp,*.cc call _cplusplus()
 augroup END
 
-function! OpenPythonQuickfix()
-    TlistToggle
-    let winnum = winnr()
-    make
-    botright copen
-    try
-        cfirst
-    catch /E42:/
-        set modifiable
-        call setline('.', 'No Errors')
-        set nomodifiable
-        set nomodified
-        execute winnum . 'wincmd w'
-    endtry
-    TlistToggle
-    redraw!
-endfunction
-
-function! NextPythonQuickfix()
-    try
-        cnext
-    catch /E42:/
-        cclose
-    catch /E553:/
-        cclose
-    endtry
-endfunction
-
 " Python
 augroup python
     autocmd!
@@ -622,9 +465,6 @@ augroup python
         nnoremap <LEADER>ls :set list<CR>
         nnoremap <LEADER>ns :set nolist<CR>
         nnoremap <F2> :%s/\s*$//g<CR>:noh<CR>''
-        nnoremap <F3> :silent call OpenPythonQuickfix()<CR>
-        nnoremap <F4> :call NextPythonQuickfix()<CR>
-	"TlistToggle
 
         highlight OverLength ctermbg=red ctermfg=white
         match OverLength /\%101v.\+/
@@ -666,60 +506,6 @@ augroup qf
     autocmd FileType qf call _qf()
 augroup END
 
-function! TBS_Start()
-    if exists('t:TBS_opened') && t:TBS_opened == 1
-	let t:TBS_opened = 0
-	wincmd l
-	close
-	autocmd! CursorMoved <buffer>
-    else
-	let t:TBS_opened = 1
-	60vnew
-	wincmd r
-	set nonu
-	set nowrap
-	set nomodified
-	set sidescrolloff=0
-	wincmd h
-	call TBS()
-	autocmd CursorMoved <buffer> call TBS()
-    endif
-endfunction
-
-function! TBS()
-    redir => l:regs
-	silent registers
-    redir END
-    redir => l:marks
-	silent marks
-    redir END
-
-    wincmd l
-    normal ggdG
-    let l:lineno = 1
-    for l:line in split(l:regs, '\n')
-	if match(l:line, '^"[a-zA-Z]') != -1 || match(l:line, '^---') != -1
-	    call setline(l:lineno, l:line)
-	    let l:lineno = l:lineno + 1
-	endif
-    endfor
-    call setline(l:lineno, '')
-    let l:lineno = l:lineno + 1
-    call setline(l:lineno, '--- Marks ---')
-    let l:lineno = l:lineno + 1
-    for l:line in split(l:marks, '\n')
-	if match(l:line, '^.[a-z]') != -1
-	    call setline(l:lineno, l:line)
-	    let l:lineno = l:lineno + 1
-	endif
-    endfor
-    set nomodified
-    wincmd h
-endfunction
-
-nnoremap <F5> :call TBS_Start()<CR>
-nnoremap <F6> :call TBS()<CR>
-
 function! ReviewedBy()
     call setline(".", "Reviewed-by: Tzung-Bi Shih <tzungbi@kernel.org>")
 endfunction
@@ -734,13 +520,13 @@ endfunction
 
 function! AppliedTo()
     let l:strs = [
-	\"> [...]",
-	\"",
-	\"Applied to",
-	\"",
-	\"    https://git.kernel.org/pub/scm/linux/kernel/git/chrome-platform/linux.git for-next",
-	\"",
-	\"Thanks!",
+        \"> [...]",
+        \"",
+        \"Applied to",
+        \"",
+        \"    https://git.kernel.org/pub/scm/linux/kernel/git/chrome-platform/linux.git for-next",
+        \"",
+        \"Thanks!",
     \]
 
     call setline('.', l:strs)
@@ -748,13 +534,13 @@ endfunction
 
 function! AppliedToFirmware()
     let l:strs = [
-	\"> [...]",
-	\"",
-	\"Applied to",
-	\"",
-	\"    https://git.kernel.org/pub/scm/linux/kernel/git/chrome-platform/linux.git for-firmware-next",
-	\"",
-	\"Thanks!",
+        \"> [...]",
+        \"",
+        \"Applied to",
+        \"",
+        \"    https://git.kernel.org/pub/scm/linux/kernel/git/chrome-platform/linux.git for-firmware-next",
+        \"",
+        \"Thanks!",
     \]
 
     call setline('.', l:strs)
