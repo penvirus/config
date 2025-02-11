@@ -554,3 +554,9 @@ command! Atf normal! :call AppliedToFirmware()<ESC>
 
 source ~/.vim/osc52.vim
 nnoremap <LEADER>o :call SendViaOSC52(getreg())<CR>
+
+function! Shell()
+    let l:height = min([float2nr(winheight('%')) / 2, 24])
+    execute 'belowright terminal ++rows=' . l:height
+endfunction
+nnoremap <LEADER>sh :call Shell()<CR>
