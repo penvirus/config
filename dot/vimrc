@@ -560,3 +560,17 @@ function! Shell()
     execute 'belowright terminal ++rows=' . l:height
 endfunction
 nnoremap <LEADER>sh :call Shell()<CR>
+
+function! Cscope()
+    let l:width = min([float2nr(winwidth('%') / 4), 80])
+    execute 'vertical belowright terminal ++cols=' . l:width . ' ++kill=term ++close cscope -Rkbqv'
+
+    function! ResetCscope()
+	execute 'cscope kill -1'
+	execute 'cscope add cscope.out'
+    endfunction
+    autocmd! WinClosed <buffer> call ResetCscope()
+
+    execute 'wincmd h'
+endfunction
+nnoremap <LEADER>cs :call Cscope()<CR>
