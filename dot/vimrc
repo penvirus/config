@@ -343,6 +343,13 @@ noremap <F2> :%s/\s*$//g<CR>:noh<CR>''
 " Visual Tab
 set listchars=tab:>-,trail:-,eol:$,nbsp:%,extends:>,precedes:<
 
+" When editing a file, always jump to the last known cursor position.
+" Don’t do it when the position is invalid or when inside an event handle
+autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \     execute "normal g`\"" |
+    \ endif
+ 
 " Quick window resize
 nnoremap + <C-W>+
 nnoremap - <C-W>-
