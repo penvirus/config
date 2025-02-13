@@ -163,70 +163,11 @@ set hlsearch
 set wrapscan
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Moving around and window and tabs
+" Moving around and window
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Window configuration
 nnoremap <LEADER>h <C-W>h
 nnoremap <LEADER>l <C-W>l
-" Tab configuration
-nmap <LEADER>tc :tabnew<CR>
-nmap <LEADER>te :tabedit<SPACE>
-nmap <LEADER>tm :tabmove<SPACE>
-nmap <LEADER>tk :tabclose<CR>
-nmap <C-H> :tabprev<CR>
-nmap <C-L> :tabnext<CR>
-" For tmux
-nmap <C-?> :tabprev<CR>
-
-" Last used tab switching
-autocmd TabLeave * let g:LastUsedTabPage = tabpagenr()
-function! SwitchLastUsedTab()
-    if exists("g:LastUsedTabPage")
-        execute "tabnext " g:LastUsedTabPage
-    endif
-endfunction
-nmap tt :call SwitchLastUsedTab()<CR>
-
-set switchbuf=usetab
-
-" Always show tab line
-set showtabline=2
-
-" Tab line format
-function! TabLine()
-    let s = ''
-    for i in range(1, tabpagenr('$'))
-        let hiBG = ((i == tabpagenr()) ? '%#TabLineSel#' : '%#TabLine#')
-        let winnr = tabpagewinnr(i, '$')
-        "let filename = bufname(tabpagebuflist(i)[winnr - 1])
-        let filename = bufname(tabpagebuflist(i)[0])
-        if (filename == 'NERD_Tree_1')
-            let filename = bufname(tabpagebuflist(i)[1])
-        endif
-        if (filename == '')
-            let filename = '=No Name='
-        endif
-        let s .= hiBG . ' '
-        if (winnr > 1)
-            let s .= '[' . (i - 1). '-' . winnr . '] '
-        else
-            let s .= '[' . (i - 1) . '] '
-        endif
-        "let s .= substitute(filename, '.\+\/', '', 'g')
-        let s .= filename
-        let s .= (1 == gettabwinvar(i, 1, '&modified') ? '[+]' : '')
-        let s .= ' '
-        let i += 1
-    exe | endfor
-    let s .= '%#TabLineFill#'
-    return s
-endfunction
-
-" Only when no GUI
-if !has("gui_running")
-    " Customized tabline
-    set tabline=%!TabLine()
-endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General Abbrevs
