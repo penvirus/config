@@ -173,3 +173,13 @@ function! BufMenuInit()
     nnoremap <LEADER>bd :call BufMenuDeleteBuf()<CR>
 endfunction
 nnoremap <LEADER>bm :call BufMenuInit()<CR>
+
+function! BufMenuAutoInit()
+    if argc() != 0
+	return
+    endif
+
+    call BufMenuInit()
+endfunction
+
+autocmd VimEnter * call BufMenuAutoInit()
