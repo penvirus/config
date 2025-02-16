@@ -17,7 +17,7 @@ hi Added             cterm=BOLD  ctermfg=11  ctermbg=NONE
 hi Removed           cterm=BOLD  ctermfg=39  ctermbg=NONE
 hi Directory         cterm=NONE  ctermfg=46  ctermbg=NONE
 hi ErrorMsg          cterm=BOLD  ctermfg=16  ctermbg=124
-hi FoldColumn        cterm=NONE  ctermfg=34  ctermbg=232
+hi FoldColumn        cterm=NONE  ctermfg=34  ctermbg=0
 hi Folded            cterm=NONE  ctermfg=231 ctermbg=244
 hi IncSearch         cterm=BOLD  ctermfg=232 ctermbg=119
 hi LineNr            cterm=NONE  ctermfg=150 ctermbg=NONE
