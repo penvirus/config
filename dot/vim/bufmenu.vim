@@ -124,7 +124,8 @@ function! BufMenuReload()
     call setbufvar(g:BufMenuName, '&modifiable', 1)
     call deletebufline(g:BufMenuName, 1, '$')
 
-    call setbufline(g:BufMenuName, 1, printf("%3S\t%S", "Buf", "File"))
+    let width = winwidth(g:BufMenuWinID)
+    call setbufline(g:BufMenuName, 1, printf("%3s\t%s", "Buf", "File"))
 
     let i = 2
     for buf in getbufinfo()
@@ -132,7 +133,15 @@ function! BufMenuReload()
             continue
         endif
 
-        let str = printf("%3s\t%s", buf['bufnr'], fnamemodify(buf['name'], ':~:.'))
+        let str = printf("%3s\t", buf['bufnr'])
+	let fname = fnamemodify(buf['name'], ':~:.')
+
+        " the first tab == 8 columns
+	if 8 + len(fname) > width
+	    let fname = '...' . fname[-(width - 8 - 3):]
+	endif
+	let str .= fname
+
         call setbufline(g:BufMenuName, i, str)
         let i += 1
     endfor
