@@ -167,6 +167,8 @@ set wrapscan
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Window configuration
 nnoremap <LEADER>h <C-W>h
+nnoremap <LEADER>j <C-W>j
+nnoremap <LEADER>k <C-W>k
 nnoremap <LEADER>l <C-W>l
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
