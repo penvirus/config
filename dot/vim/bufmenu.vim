@@ -102,11 +102,12 @@ function! BufMenuSelect(init)
     call BufMenuMarkCur(nr)
 endfunction
 
-"function! BufMenuDeleteBuf()
-"    let bufnr = winbufnr(g:BufMenuMainWinID)
-"    call BufMenuNextBuf()
-"    execute 'bdelete ' . bufnr
-"endfunction
+function! BufMenuDeleteBuf()
+    let bufnr = winbufnr(g:BufMenuMainWinID)
+    call BufMenuNextBuf()
+    execute 'bwipeout ' . bufnr
+    call BufMenuReload()
+endfunction
 
 function! BufMenuDeinit()
     if !g:BufMenuEnabled || expand('<afile>') != g:BufMenuMainWinID
@@ -161,7 +162,7 @@ function! BufMenuInit()
     call BufMenuSelect(1)
     call win_gotoid(g:BufMenuMainWinID)
 
-    autocmd BufCreate,BufReadPost,BufWipeout * call BufMenuReload()
+    autocmd BufCreate,BufReadPost * call BufMenuReload()
     autocmd BufWinLeave * call BufMenuSaveLastUsedBuf()
     autocmd BufWinEnter * call BufMenuSelect(0)
     autocmd WinClosed * call BufMenuDeinit()
@@ -169,6 +170,6 @@ function! BufMenuInit()
     nnoremap <LEADER>bs :call BufMenuSwitchLastUsed()<CR>
     nnoremap <LEADER>bn :call BufMenuNextBuf()<CR>
     nnoremap <LEADER>bp :call BufMenuPreviousBuf()<CR>
-    "nnoremap <LEADER>bd :call BufMenuDeleteBuf()<CR>
+    nnoremap <LEADER>bd :call BufMenuDeleteBuf()<CR>
 endfunction
 nnoremap <LEADER>bm :call BufMenuInit()<CR>
