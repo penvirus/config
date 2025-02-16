@@ -153,7 +153,7 @@ function! BufMenuInit()
     let width = min([float2nr(winwidth('%') / 5), 80])
     execute 'vertical topleft ' . width . 'vsplit ' . g:BufMenuName
     let g:BufMenuWinID = win_getid()
-    setlocal buftype=nofile bufhidden=wipe statusline=%q
+    setlocal buftype=nofile bufhidden=wipe statusline=%q foldcolumn=0
     setlocal nobuflisted nonu nowrap winfixwidth
     highlight BufMenuCur cterm=bold ctermfg=231 ctermbg=57
     nnoremap <buffer> <CR> :call BufMenuSwitchBuf(line('.'))<CR>
