@@ -94,6 +94,8 @@ function! BufMenuSelect(init)
 	let bufnr = expand('<abuf>')
     endif
 
+    call BufMenuReload()
+
     let nr = BufMenuFind(bufnr)
     if nr == -1
         return
@@ -167,7 +169,6 @@ function! BufMenuInit()
     highlight BufMenuCur cterm=bold ctermfg=231 ctermbg=57
     nnoremap <buffer> <CR> :call BufMenuSwitchBuf(line('.'))<CR>
 
-    call BufMenuReload()
     call BufMenuSelect(1)
     call win_gotoid(g:BufMenuMainWinID)
 
