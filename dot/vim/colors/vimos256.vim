@@ -27,7 +27,7 @@ hi MBEVisibleChanged             ctermfg=253 ctermbg=238
 hi MBEVisibleNormal              ctermfg=247 ctermbg=238
 hi ModeMsg           cterm=BOLD  ctermfg=61  ctermbg=NONE
 hi MoreMsg           cterm=BOLD  ctermfg=61  ctermbg=NONE
-hi NonText           cterm=NONE  ctermfg=0   ctermbg=NONE
+hi NonText           cterm=BOLD  ctermfg=63  ctermbg=NONE
 hi Normal            cterm=NONE  ctermfg=231 ctermbg=NONE
 hi Question          cterm=BOLD  ctermfg=130 ctermbg=NONE
 hi Search            cterm=NONE  ctermfg=232 ctermbg=119
@@ -41,7 +41,7 @@ hi Title             cterm=BOLD  ctermfg=124 ctermbg=NONE
 hi Type              cterm=NONE  ctermfg=207 ctermbg=NONE
 hi User1             cterm=BOLD  ctermfg=46  ctermbg=235
 hi User2             cterm=BOLD  ctermfg=63  ctermbg=235
-hi VertSplit         cterm=NONE  ctermfg=0   ctermbg=0
+hi VertSplit         cterm=NONE  ctermfg=244 ctermbg=NONE
 hi Visual            cterm=NONE  ctermfg=231 ctermbg=61
 hi WarningMsg        cterm=BOLD  ctermfg=16  ctermbg=202
 hi WildMenu          cterm=BOLD  ctermfg=253 ctermbg=61
