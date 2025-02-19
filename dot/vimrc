@@ -109,6 +109,9 @@ set showfulltag
 " How many tenths of a second to blink (Bracket blinking)
 set mat=2
 
+" Remove VertSplit and EndOfBuffer characters
+set fillchars=vert:\ ,eob:\ 
+
 " Enable syntax highlighting
 syntax enable
 
