@@ -173,6 +173,11 @@ nnoremap <LEADER>h <C-W>h
 nnoremap <LEADER>j <C-W>j
 nnoremap <LEADER>k <C-W>k
 nnoremap <LEADER>l <C-W>l
+" Make it also work in terminal
+tnoremap <LEADER>h <C-W>h
+tnoremap <LEADER>j <C-W>j
+tnoremap <LEADER>k <C-W>k
+tnoremap <LEADER>l <C-W>l
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General Abbrevs
