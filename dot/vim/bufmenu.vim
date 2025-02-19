@@ -135,6 +135,10 @@ function! BufMenuReload()
             continue
         endif
 
+	if getbufvar(buf['bufnr'], '&buftype') == 'terminal'
+	    continue
+	endif
+
         let str = printf("%3s\t", buf['bufnr'])
 	let fname = fnamemodify(buf['name'], ':~:.')
 
@@ -172,7 +176,7 @@ function! BufMenuInit()
     call BufMenuSelect(1)
     call win_gotoid(g:BufMenuMainWinID)
 
-    autocmd BufCreate,BufReadPost * call BufMenuReload()
+    autocmd BufCreate,BufReadPost,TerminalWinOpen * call BufMenuReload()
     autocmd BufWinLeave * call BufMenuSaveLastUsedBuf()
     autocmd BufWinEnter * call BufMenuSelect(0)
     autocmd WinClosed * call BufMenuDeinit()
