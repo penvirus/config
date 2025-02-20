@@ -116,7 +116,7 @@ function! BufMenuDeinit()
         return
     endif
 
-    call win_execute(g:BufMenuWinID, 'qall')
+    call win_execute(g:BufMenuWinID, 'qall!')
     unlet g:BufMenuMainWinID
     unlet g:BufMenuWinID
     unlet g:BufMenuCurBufNr
