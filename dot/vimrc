@@ -515,11 +515,16 @@ nnoremap <LEADER>o :call SendViaOSC52(getreg())<CR>
 
 source ~/.vim/bufmenu.vim
 
-function! Shell()
+function! ShellHorizontal()
     let l:height = min([float2nr(winheight('%')) / 2, 24])
     execute 'belowright terminal ++rows=' . l:height
 endfunction
-nnoremap <LEADER>sh :call Shell()<CR>
+nnoremap <LEADER>sh :call ShellHorizontal()<CR>
+function! ShellVertical()
+    let l:width = min([float2nr(winwidth('%') / 2), 80])
+    execute 'belowright vertical terminal ++cols=' . l:width
+endfunction
+nnoremap <LEADER>vs :call ShellVertical()<CR>
 
 function! Cscope()
     let l:width = min([float2nr(winwidth('%') / 4), 80])
