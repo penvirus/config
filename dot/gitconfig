@@ -61,3 +61,6 @@
 	from = Tzung-Bi Shih <tzungbi@kernel.org>
 	smtpuser = tzungbi
 	smtppass = REPLACE_ME
+[diff-so-fancy]
+	rulerWidth = 80
+	useUnicodeRuler = false
