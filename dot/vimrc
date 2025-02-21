@@ -74,9 +74,6 @@ set ruler
 " The command bar is 2 high
 set cmdheight=2
 
-" Show line number
-set number
-
 " Do not redraw while running macros (much faster) (LazyRedraw)
 set lazyredraw
 
