@@ -131,11 +131,8 @@ function! BufMenuReload()
 
     let i = 2
     for buf in getbufinfo()
-        if bufname(buf['bufnr']) == g:BufMenuName
-            continue
-        endif
-
-	if getbufvar(buf['bufnr'], '&buftype') == 'terminal'
+	let bt = getbufvar(buf['bufnr'], '&buftype')
+	if bt == 'terminal' || bt == 'nofile'
 	    continue
 	endif
 
