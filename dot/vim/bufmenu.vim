@@ -179,6 +179,8 @@ function! BufMenuInit()
     nnoremap <LEADER>bn :call BufMenuNextBuf()<CR>
     nnoremap <LEADER>bp :call BufMenuPreviousBuf()<CR>
     nnoremap <LEADER>bd :call BufMenuDeleteBuf()<CR>
+    nnoremap <C-L> :call BufMenuNextBuf()<CR>
+    nnoremap <C-H> :call BufMenuPreviousBuf()<CR>
 endfunction
 nnoremap <LEADER>bm :call BufMenuInit()<CR>
 
