@@ -159,9 +159,6 @@ function! BufMenuInit()
     let g:BufMenuEnabled = 1
     let g:BufMenuMainWinID = win_getid()
 
-    let st = '(Main) ' . getwinvar(g:BufMenuMainWinID, '&statusline')
-    call setwinvar(g:BufMenuMainWinID, '&statusline', st)
-
     let width = min([float2nr(winwidth('%') / 5), 80])
     execute 'vertical topleft ' . width . 'vsplit ' . g:BufMenuName
     let g:BufMenuWinID = win_getid()
