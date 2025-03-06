@@ -83,8 +83,8 @@ function! BufMenuSaveLastUsedBuf()
     let g:BufMenuLastUsedBufNr = winbufnr(g:BufMenuMainWinID)
 endfunction
 
-function! BufMenuSelect(init)
-    if a:init
+function! BufMenuSelect(in_autocmd)
+    if !a:in_autocmd
         let bufnr = winbufnr(g:BufMenuMainWinID)
     else
         if !g:BufMenuEnabled || win_getid() != g:BufMenuMainWinID
@@ -109,6 +109,15 @@ function! BufMenuDeleteBuf()
     call BufMenuNextBuf()
     execute 'bwipeout ' . bufnr
     call BufMenuReload()
+endfunction
+
+function! BufMenuOpenCWD()
+    let bufnr = winbufnr(g:BufMenuMainWinID)
+    let info = getbufinfo(bufnr)[0]
+    let dir = fnamemodify(info['name'], ':p:h')
+
+    execute 'edit ' . dir
+    call BufMenuSelect(0)
 endfunction
 
 function! BufMenuDeinit()
@@ -167,18 +176,19 @@ function! BufMenuInit()
     highlight BufMenuCur cterm=bold ctermfg=231 ctermbg=57
     nnoremap <buffer> <CR> :call BufMenuSwitchBuf(line('.'))<CR>
 
-    call BufMenuSelect(1)
+    call BufMenuSelect(0)
     call win_gotoid(g:BufMenuMainWinID)
 
     autocmd BufCreate,BufReadPost,TerminalWinOpen * call BufMenuReload()
     autocmd BufWinLeave * call BufMenuSaveLastUsedBuf()
-    autocmd BufWinEnter * call BufMenuSelect(0)
+    autocmd BufWinEnter * call BufMenuSelect(1)
     autocmd WinClosed * call BufMenuDeinit()
 
     nnoremap <LEADER>bs :call BufMenuSwitchLastUsed()<CR>
     nnoremap <LEADER>bn :call BufMenuNextBuf()<CR>
     nnoremap <LEADER>bp :call BufMenuPreviousBuf()<CR>
     nnoremap <LEADER>bd :call BufMenuDeleteBuf()<CR>
+    nnoremap <LEADER>bo :call BufMenuOpenCWD()<CR>
     nnoremap <C-L> :call BufMenuNextBuf()<CR>
     nnoremap <C-H> :call BufMenuPreviousBuf()<CR>
 endfunction
