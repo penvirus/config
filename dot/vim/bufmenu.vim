@@ -146,7 +146,11 @@ function! BufMenuReload()
 	endif
 
         let str = printf("%3s\t", buf['bufnr'])
-	let fname = fnamemodify(buf['name'], ':~:.')
+	if !empty(buf['name'])
+	    let fname = fnamemodify(buf['name'], ':~:.')
+	else
+	    let fname = '(empty)'
+	endif
 
         " the first tab == 8 columns
 	if 8 + len(fname) > width
