@@ -449,6 +449,18 @@ augroup sh
     autocmd FileType sh call _sh()
 augroup END
 
+" vim script
+augroup vim
+    autocmd!
+    function! _vim()
+        set shiftwidth=4
+        set softtabstop=4
+        set tabstop=4
+        set expandtab
+    endfunction
+    autocmd FileType vim call _vim()
+augroup END
+
 " quick fix
 augroup qf
     autocmd!
