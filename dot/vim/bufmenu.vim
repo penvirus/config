@@ -77,7 +77,7 @@ endfunction
 
 function! BufMenuSaveLastUsedBuf()
     if !g:BufMenuEnabled || win_getid() != g:BufMenuMainWinID
-	return
+        return
     endif
 
     let g:BufMenuLastUsedBufNr = winbufnr(g:BufMenuMainWinID)
@@ -91,7 +91,7 @@ function! BufMenuSelect(in_autocmd)
             return
         endif
 
-	let bufnr = expand('<abuf>')
+        let bufnr = expand('<abuf>')
     endif
 
     call BufMenuReload()
@@ -140,23 +140,23 @@ function! BufMenuReload()
 
     let i = 2
     for buf in getbufinfo()
-	let bt = getbufvar(buf['bufnr'], '&buftype')
-	if bt == 'terminal' || bt == 'nofile'
-	    continue
-	endif
+        let bt = getbufvar(buf['bufnr'], '&buftype')
+        if bt == 'terminal' || bt == 'nofile'
+            continue
+        endif
 
         let str = printf("%3s\t", buf['bufnr'])
-	if !empty(buf['name'])
-	    let fname = fnamemodify(buf['name'], ':~:.')
-	else
-	    let fname = '(empty)'
-	endif
+        if !empty(buf['name'])
+            let fname = fnamemodify(buf['name'], ':~:.')
+        else
+            let fname = '(empty)'
+        endif
 
         " the first tab == 8 columns
-	if 8 + len(fname) > width
-	    let fname = '...' . fname[-(width - 8 - 3):]
-	endif
-	let str .= fname
+        if 8 + len(fname) > width
+            let fname = '...' . fname[-(width - 8 - 3):]
+        endif
+        let str .= fname
 
         call setbufline(g:BufMenuName, i, str)
         let i += 1
@@ -200,7 +200,7 @@ nnoremap <LEADER>bm :call BufMenuInit()<CR>
 
 function! BufMenuAutoInit()
     if argc() != 0
-	return
+        return
     endif
 
     call BufMenuInit()
