@@ -145,6 +145,10 @@ function! BufMenuReload()
             continue
         endif
 
+        if exists("buf['variables']['netrw_browser_active']")
+            continue
+        endif
+
         let str = printf("%3s\t", buf['bufnr'])
         if !empty(buf['name'])
             let fname = fnamemodify(buf['name'], ':~:.')
