@@ -108,7 +108,7 @@ function! BufMenuDeleteBuf()
     let bufnr = winbufnr(g:BufMenuMainWinID)
     call BufMenuNextBuf()
     execute 'bwipeout ' . bufnr
-    call BufMenuReload()
+    call BufMenuSelect(0)
 endfunction
 
 function! BufMenuOpenCWD()
