@@ -229,8 +229,6 @@ function! BufMenuInit()
     autocmd WinClosed * call BufMenuDeinit()
 
     nnoremap <LEADER>bs :call BufMenuSwitchLastUsed()<CR>
-    nnoremap <LEADER>bn :call BufMenuNextBuf()<CR>
-    nnoremap <LEADER>bp :call BufMenuPreviousBuf()<CR>
     nnoremap <LEADER>bd :call BufMenuDeleteBuf()<CR>
     nnoremap <LEADER>bo :call BufMenuOpenCWD()<CR>
     nnoremap <C-L> :call BufMenuNextBuf()<CR>
