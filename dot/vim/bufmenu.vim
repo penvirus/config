@@ -103,8 +103,18 @@ endfunction
 " Delete cur buf.
 function! BufMenuDeleteBuf()
     let bufnr = winbufnr(g:BufMenuMainWinID)
+    let buf = getbufinfo(bufnr)[0]
+    let i = index(g:BufMenuList, buf.name)
+    call remove(g:BufMenuList, i)
+    call remove(g:BufMenuDict, buf.name)
+
+    if empty(g:BufMenuList)
+        execute 'qall'
+    endif
+
     call BufMenuNextBuf()
     execute 'bwipeout ' . bufnr
+
     call BufMenuSync()
 endfunction
 
