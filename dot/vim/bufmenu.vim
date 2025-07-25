@@ -1,4 +1,4 @@
-let g:BufMenuEnabled = 0
+let g:BufMenuEnabled = v:false
 let g:BufMenuName = 'buf_menu'
 let g:BufMenuList = []
 let g:BufMenuDict = {}
@@ -189,7 +189,7 @@ function! BufMenuInit()
     if g:BufMenuEnabled
         return
     endif
-    let g:BufMenuEnabled = 1
+    let g:BufMenuEnabled = v:true
     let g:BufMenuMainWinID = win_getid()
 
     let width = min([float2nr(winwidth('%') / 5), 80])
