@@ -201,13 +201,3 @@ function! BufMenuInit()
     nnoremap <C-H> :call BufMenuPreviousBuf()<CR>
 endfunction
 nnoremap <LEADER>bm :call BufMenuInit()<CR>
-
-function! BufMenuAutoInit()
-    if argc() != 0
-        return
-    endif
-
-    call BufMenuInit()
-endfunction
-
-autocmd VimEnter * call BufMenuAutoInit()
