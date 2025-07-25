@@ -182,13 +182,19 @@ endfunction
 
 " Check if a new file is editing.  If yes, add to the menu.
 function! BufMenuCheckEdit()
-    let last_cmd = split(histget(':'))
+    let nr = histnr(':')
+    if exists('g:LastHistNr') && nr == g:LastHistNr
+        return
+    endif
+    let g:LastHistNr = nr
 
-    if len(last_cmd) != 2 || last_cmd[0] != 'e'
+    let cmd = split(histget(':'))
+
+    if len(cmd) != 2 || cmd[0] != 'e'
         return
     endif
 
-    let file = last_cmd[1]
+    let file = cmd[1]
     if !filereadable(file)
         return
     endif
