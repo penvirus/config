@@ -17,7 +17,7 @@ endfunction
 function! BufMenuSwitchBuf(linenr)
     let found = v:false
     for [k, v] in items(g:BufMenuDict)
-        if v['bufmenu_linenr'] == a:linenr
+        if v.bufmenu_linenr == a:linenr
             let found = v:true
             break
         endif
@@ -68,8 +68,8 @@ endfunction
 function! BufMenuFind(bufnr)
     for line in getbufline(g:BufMenuName, 1, '$')
         for v in values(g:BufMenuDict)
-            if v['bufnr'] == a:bufnr
-                return v['bufmenu_linenr']
+            if v.bufnr == a:bufnr
+                return v.bufmenu_linenr
             endif
         endfor
     endfor
@@ -120,8 +120,8 @@ endfunction
 
 function! BufMenuOpenCWD()
     let bufnr = winbufnr(g:BufMenuMainWinID)
-    let info = getbufinfo(bufnr)[0]
-    let dir = fnamemodify(info['name'], ':p:h')
+    let buf = getbufinfo(bufnr)[0]
+    let dir = fnamemodify(buf.name, ':p:h')
 
     execute 'edit ' . dir
     call BufMenuSync()
@@ -147,14 +147,14 @@ function! BufMenuReload()
 
     let i = 1
     for file in g:BufMenuList
-        let rel_path = g:BufMenuDict[file]['relative_path']
+        let rel_path = g:BufMenuDict[file].relative_path
 
         if len(rel_path) > width
             let rel_path = '...' . rel_path[-(width - 3):]
         endif
 
         call setbufline(g:BufMenuName, i, rel_path)
-        let g:BufMenuDict[file]['bufmenu_linenr'] = i
+        let g:BufMenuDict[file].bufmenu_linenr = i
         let i += 1
     endfor
 
