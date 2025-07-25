@@ -165,6 +165,8 @@ function! BufMenuAddFile(file)
         \'relative_path': fnamemodify(buf.name, ':~:.'),
         \'bufmenu_linenr': 0,
     \}
+
+    call BufMenuSync()
 endfunction
 
 " Check if a new file is editing.  If yes, add to the menu.
@@ -181,7 +183,6 @@ function! BufMenuCheckEdit()
     endif
 
     call BufMenuAddFile(file)
-    call BufMenuSync()
 endfunction
 
 " Init buf menu module.
@@ -229,6 +230,7 @@ function! BufMenuInit()
     autocmd WinClosed * call BufMenuDeinit()
 
     nnoremap <LEADER>bs :call BufMenuSwitchLastUsed()<CR>
+    nnoremap <LEADER>bn :call BufMenuAddFile(expand('%'))<CR>
     nnoremap <LEADER>bd :call BufMenuDeleteBuf()<CR>
     nnoremap <LEADER>bo :call BufMenuOpenCWD()<CR>
     nnoremap <C-L> :call BufMenuNextBuf()<CR>
