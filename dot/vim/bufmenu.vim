@@ -169,7 +169,7 @@ function! BufMenuAddFile(file)
         return
     endif
 
-    let g:BufMenuList += [buf.name]
+    call add(g:BufMenuList, buf.name)
     let g:BufMenuDict[buf.name] = {
         \'bufnr': buf.bufnr,
         \'relative_path': fnamemodify(buf.name, ':~:.'),
@@ -225,7 +225,7 @@ function! BufMenuInit()
             continue
         endif
 
-        let g:BufMenuList += [buf.name]
+        call add(g:BufMenuList, buf.name)
         let g:BufMenuDict[buf.name] = {
             \'bufnr': buf.bufnr,
             \'relative_path': file,
