@@ -1,7 +1,15 @@
-let g:BufMenuEnabled = v:false
 let g:BufMenuName = 'buf_menu'
 let g:BufMenuList = []
 let g:BufMenuDict = {}
+
+function! BufMenuEnabled()
+    for l:winnr in range(1, winnr('$'))
+        if !empty(getwinvar(l:winnr, 'bufmenu_status'))
+            return v:true
+        endif
+    endfor
+    return v:false
+endfunction
 
 " Mark current display buf in the menu.
 "
@@ -34,7 +42,7 @@ endfunction
 
 " Switch to next buf.
 function! BufMenuNextBuf()
-    if !g:BufMenuEnabled
+    if !BufMenuEnabled()
         return
     endif
 
@@ -48,7 +56,7 @@ endfunction
 
 " Switch to previous buf.
 function! BufMenuPreviousBuf()
-    if !g:BufMenuEnabled
+    if !BufMenuEnabled()
         return
     endif
 
@@ -128,7 +136,7 @@ function! BufMenuOpenCWD()
 endfunction
 
 function! BufMenuDeinit()
-    if !g:BufMenuEnabled || expand('<afile>') != g:BufMenuMainWinID
+    if !BufMenuEnabled() || expand('<afile>') != g:BufMenuMainWinID
         return
     endif
 
@@ -204,15 +212,15 @@ endfunction
 
 " Init buf menu module.
 function! BufMenuInit()
-    if g:BufMenuEnabled
+    if BufMenuEnabled()
         return
     endif
-    let g:BufMenuEnabled = v:true
     let g:BufMenuMainWinID = win_getid()
 
     let width = min([float2nr(winwidth(0) / 5), 80])
     execute 'vertical topleft ' . width . 'vsplit ' . g:BufMenuName
     let g:BufMenuWinID = win_getid()
+    call setwinvar(g:BufMenuWinID, 'bufmenu_status', 'enabled')
     setlocal buftype=nofile bufhidden=wipe statusline=%q foldcolumn=0
     setlocal nobuflisted nonu nowrap winfixwidth
     highlight BufMenuCur cterm=bold ctermfg=231 ctermbg=57
