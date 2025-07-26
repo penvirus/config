@@ -496,8 +496,8 @@ function! Cscope()
     execute 'vertical belowright terminal ++cols=' . l:width . ' ++kill=term ++close cscope -Rkbqv'
 
     function! ResetCscope()
-	execute 'cscope kill -1'
-	execute 'cscope add cscope.out'
+        execute 'cscope kill -1'
+        execute 'cscope add cscope.out'
     endfunction
     autocmd! WinClosed <buffer> call ResetCscope()
 
