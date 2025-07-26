@@ -247,13 +247,19 @@ function! BufMenuInit()
             \'relative_path': file,
             \'bufmenu_linenr': 0,
         \}
+        call autocmd_add([
+            \{
+                \'bufnr': buf.bufnr,
+                \'event': 'WinClosed',
+                \'cmd': 'call BufMenuDeinit()'
+            \}
+        \])
     endfor
 
     call BufMenuSync()
     call win_gotoid(g:BufMenuMainWinID)
 
     autocmd BufWinEnter * call BufMenuCheckEdit()
-    autocmd WinClosed * call BufMenuDeinit()
 
     nnoremap <LEADER>bs :call BufMenuSwitchLastUsed()<CR>
     nnoremap <LEADER>bn :call BufMenuAddFile(expand('%'))<CR>
