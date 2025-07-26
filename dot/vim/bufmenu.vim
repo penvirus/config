@@ -210,7 +210,7 @@ function! BufMenuInit()
     let g:BufMenuEnabled = v:true
     let g:BufMenuMainWinID = win_getid()
 
-    let width = min([float2nr(winwidth('%') / 5), 80])
+    let width = min([float2nr(winwidth(0) / 5), 80])
     execute 'vertical topleft ' . width . 'vsplit ' . g:BufMenuName
     let g:BufMenuWinID = win_getid()
     setlocal buftype=nofile bufhidden=wipe statusline=%q foldcolumn=0
