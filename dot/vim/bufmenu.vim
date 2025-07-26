@@ -210,7 +210,7 @@ function! BufMenuCheckEdit()
     endif
 
     let file = expand(cmd[1])
-    if !filereadable(file)
+    if isdirectory(file)
         return
     endif
 
