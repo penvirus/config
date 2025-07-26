@@ -184,6 +184,13 @@ function! BufMenuAddFile(file)
         \'relative_path': fnamemodify(buf.name, ':~:.'),
         \'bufmenu_linenr': 0,
     \}
+    call autocmd_add([
+        \{
+            \'bufnr': buf.bufnr,
+            \'event': 'WinClosed',
+            \'cmd': 'call BufMenuDeinit()'
+        \}
+    \])
 
     call BufMenuSync()
 endfunction
