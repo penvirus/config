@@ -194,7 +194,7 @@ function! BufMenuCheckEdit()
         return
     endif
 
-    let file = cmd[1]
+    let file = expand(cmd[1])
     if !filereadable(file)
         return
     endif
