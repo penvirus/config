@@ -99,7 +99,7 @@ function! FugitiveGitNote()
     endif
 
     setlocal statusline=%q foldcolumn=0 nonu nowrap winfixwidth
-    set filetype=gitcommit
+    set filetype=gitcommit buftype=nofile
     call setwinvar(win_getid(), s:FugitiveNoteVar, v:true)
 endfunction
 nnoremap <LEADER>gn :call FugitiveGitNote()<CR>
