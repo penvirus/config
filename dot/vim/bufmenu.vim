@@ -121,7 +121,7 @@ function! BufMenuDeleteBuf()
     endif
 
     call BufMenuNextBuf()
-    execute 'bwipeout ' . bufnr
+    execute 'bwipeout' bufnr
 
     call BufMenuSync()
 endfunction
@@ -131,7 +131,7 @@ function! BufMenuOpenCWD()
     let buf = getbufinfo(bufnr)[0]
     let dir = fnamemodify(buf.name, ':p:h')
 
-    execute 'edit ' . dir
+    execute 'edit' dir
     call BufMenuSync()
 endfunction
 
@@ -225,7 +225,7 @@ function! BufMenuInit()
     let g:BufMenuMainWinID = win_getid()
 
     let width = min([float2nr(&columns / 5), 80])
-    execute 'vertical topleft ' . width . 'vsplit ' . g:BufMenuName
+    execute 'vertical topleft' width .. 'vsplit' g:BufMenuName
     let g:BufMenuWinID = win_getid()
     call setwinvar(g:BufMenuWinID, 'bufmenu_status', 'enabled')
     setlocal buftype=nofile bufhidden=wipe statusline=%q foldcolumn=0
