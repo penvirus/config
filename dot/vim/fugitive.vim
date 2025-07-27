@@ -1,3 +1,15 @@
+const s:FugitiveGitStatusVar = 'fugitive_status'
+
+function! s:_FindWinNr(var)
+    for l:winnr in range(1, winnr('$'))
+        if !empty(getwinvar(l:winnr, a:var))
+            return l:winnr
+        endif
+    endfor
+
+    return -1
+endfunction
+
 function! FugitiveExitDiff()
     if BufMenuEnabled()
         for l:winnr in range(1, winnr('$'))
@@ -44,15 +56,12 @@ function! FugitiveViewDiff()
 endfunction
 
 function! FugitiveGitStatus()
-    for l:winnr in range(1, winnr('$'))
-        if empty(getwinvar(l:winnr, 'fugitive_status'))
-            continue
-        endif
-
+    let l:winnr = s:_FindWinNr(s:FugitiveGitStatusVar)
+    if l:winnr != -1
         " The git status is a singleton.  After closing it, it can return.
         execute l:winnr 'close'
         return
-    endfor
+    endif
 
     let l:width = min([float2nr(&columns / 3), 80])
 
