@@ -2,6 +2,22 @@ let g:BufMenuName = 'buf_menu'
 let g:BufMenuList = []
 let g:BufMenuDict = {}
 
+const s:BufMenuMainWinVar = 'bufmenu_main_win'
+
+function! s:_BufMenuFindWinID(var)
+    for l:winnr in range(1, winnr('$'))
+        if !empty(getwinvar(l:winnr, a:var))
+            return win_getid(l:winnr)
+        endif
+    endfor
+
+    return -1
+endfunction
+
+function! BufMenuFindMainWinID()
+    return s:_BufMenuFindWinID(s:BufMenuMainWinVar)
+endfunction
+
 function! BufMenuEnabled()
     for l:winnr in range(1, winnr('$'))
         if !empty(getwinvar(l:winnr, 'bufmenu_status'))
@@ -34,10 +50,12 @@ function! BufMenuSwitchBuf(linenr)
         return
     endif
 
+    let l:main_winid = BufMenuFindMainWinID()
+
     let g:BufMenuLastUsedLineNr = g:BufMenuCurLineNr
     call BufMenuMarkCur(a:linenr)
-    call win_execute(g:BufMenuMainWinID, 'buffer ' . k)
-    call win_gotoid(g:BufMenuMainWinID)
+    call win_execute(l:main_winid, 'buffer ' . k)
+    call win_gotoid(l:main_winid)
 endfunction
 
 " Switch to next buf.
@@ -96,7 +114,7 @@ endfunction
 
 " Sync buf menu and main window ID.
 function! BufMenuSync()
-    let bufnr = winbufnr(g:BufMenuMainWinID)
+    let bufnr = winbufnr(BufMenuFindMainWinID())
 
     call BufMenuReload()
 
@@ -110,7 +128,7 @@ endfunction
 
 " Delete cur buf.
 function! BufMenuDeleteBuf()
-    let bufnr = winbufnr(g:BufMenuMainWinID)
+    let bufnr = winbufnr(BufMenuFindMainWinID())
     let buf = getbufinfo(bufnr)[0]
     let i = index(g:BufMenuList, buf.name)
     call remove(g:BufMenuList, i)
@@ -127,7 +145,7 @@ function! BufMenuDeleteBuf()
 endfunction
 
 function! BufMenuOpenCWD()
-    let bufnr = winbufnr(g:BufMenuMainWinID)
+    let bufnr = winbufnr(BufMenuFindMainWinID())
     let buf = getbufinfo(bufnr)[0]
     let dir = fnamemodify(buf.name, ':p:h')
 
@@ -136,12 +154,14 @@ function! BufMenuOpenCWD()
 endfunction
 
 function! BufMenuDeinit()
-    if !BufMenuEnabled() || expand('<afile>') != g:BufMenuMainWinID
+    let l:main_winid = BufMenuFindMainWinID()
+
+    if !BufMenuEnabled() || expand('<afile>') != l:main_winid
         return
     endif
 
     call win_execute(g:BufMenuWinID, 'qall!')
-    unlet g:BufMenuMainWinID
+    call setwinvar(l:main_winid, s:BufMenuMainWinVar, '')
     unlet g:BufMenuWinID
     unlet g:BufMenuCurLineNr
 endfunction
@@ -222,7 +242,9 @@ function! BufMenuInit()
     if BufMenuEnabled()
         return
     endif
-    let g:BufMenuMainWinID = win_getid()
+
+    let l:main_winid = win_getid()
+    call setwinvar(l:main_winid, s:BufMenuMainWinVar, v:true)
 
     let width = min([float2nr(&columns / 5), 80])
     execute 'vertical topleft' width .. 'vsplit' g:BufMenuName
@@ -264,7 +286,7 @@ function! BufMenuInit()
     endfor
 
     call BufMenuSync()
-    call win_gotoid(g:BufMenuMainWinID)
+    call win_gotoid(l:main_winid)
 
     autocmd BufWinEnter * call BufMenuCheckEdit()
 
