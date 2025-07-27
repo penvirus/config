@@ -1,4 +1,5 @@
 const s:FugitiveGitStatusVar = 'fugitive_status'
+const s:FugitiveDiffVar = 'fugitive_diff_restore'
 
 function! s:_FindWinNr(var)
     for l:winnr in range(1, winnr('$'))
@@ -13,7 +14,7 @@ endfunction
 function! FugitiveExitDiff()
     if BufMenuEnabled()
         for l:winnr in range(1, winnr('$'))
-            if empty(getwinvar(l:winnr, 'fugitive_diff_restore'))
+            if empty(getwinvar(l:winnr, s:FugitiveDiffVar))
                 continue
             endif
 
@@ -43,7 +44,7 @@ function! FugitiveViewDiff()
 
     " Set buffer-specific nmap for exiting diff.
     for l:winnr in range(1, winnr('$'))
-        if empty(getwinvar(l:winnr, 'fugitive_diff_restore'))
+        if empty(getwinvar(l:winnr, s:FugitiveDiffVar))
             continue
         endif
 
