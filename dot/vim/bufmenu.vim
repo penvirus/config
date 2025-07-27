@@ -3,6 +3,7 @@ let g:BufMenuDict = {}
 
 const s:BufMenuName = 'buf_menu'
 const s:BufMenuMainWinVar = 'bufmenu_main_win'
+const s:BufMenuMenuWinVar = 'bufmenu_menu_win'
 
 function! s:_BufMenuFindWinID(var)
     for l:winnr in range(1, winnr('$'))
@@ -18,15 +19,13 @@ function! BufMenuFindMainWinID()
     return s:_BufMenuFindWinID(s:BufMenuMainWinVar)
 endfunction
 
-function! BufMenuEnabled()
-    for l:winnr in range(1, winnr('$'))
-        if !empty(getwinvar(l:winnr, 'bufmenu_status'))
-            return v:true
-        endif
-    endfor
-    return v:false
+function! BufMenuFindMenuWinID()
+    return s:_BufMenuFindWinID(s:BufMenuMenuWinVar)
 endfunction
 
+function! BufMenuEnabled()
+    return BufMenuFindMenuWinID() != -1
+endfunction
 
 " Mark current display buf in the menu.
 "
@@ -250,7 +249,7 @@ function! BufMenuInit()
     let width = min([float2nr(&columns / 5), 80])
     execute 'vertical topleft' width .. 'vsplit' s:BufMenuName
     let g:BufMenuWinID = win_getid()
-    call setwinvar(g:BufMenuWinID, 'bufmenu_status', 'enabled')
+    call setwinvar(g:BufMenuWinID, s:BufMenuMenuWinVar, v:true)
     setlocal buftype=nofile bufhidden=wipe statusline=%q foldcolumn=0
     setlocal nobuflisted nonu nowrap winfixwidth
     highlight BufMenuCur cterm=bold ctermfg=231 ctermbg=57
