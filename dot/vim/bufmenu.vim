@@ -1,7 +1,7 @@
-let g:BufMenuName = 'buf_menu'
 let g:BufMenuList = []
 let g:BufMenuDict = {}
 
+const s:BufMenuName = 'buf_menu'
 const s:BufMenuMainWinVar = 'bufmenu_main_win'
 
 function! s:_BufMenuFindWinID(var)
@@ -26,6 +26,7 @@ function! BufMenuEnabled()
     endfor
     return v:false
 endfunction
+
 
 " Mark current display buf in the menu.
 "
@@ -92,7 +93,7 @@ endfunction
 "
 " @bufnr: The buf nr.
 function! BufMenuFind(bufnr)
-    for line in getbufline(g:BufMenuName, 1, '$')
+    for line in getbufline(s:BufMenuName, 1, '$')
         for v in values(g:BufMenuDict)
             if v.bufnr == a:bufnr
                 return v.bufmenu_linenr
@@ -168,8 +169,8 @@ endfunction
 
 " Reload the buf menu.
 function! BufMenuReload()
-    call setbufvar(g:BufMenuName, '&modifiable', 1)
-    call deletebufline(g:BufMenuName, 1, '$')
+    call setbufvar(s:BufMenuName, '&modifiable', 1)
+    call deletebufline(s:BufMenuName, 1, '$')
 
     let width = winwidth(g:BufMenuWinID)
 
@@ -181,12 +182,12 @@ function! BufMenuReload()
             let rel_path = '...' . rel_path[-(width - 3):]
         endif
 
-        call setbufline(g:BufMenuName, i, rel_path)
+        call setbufline(s:BufMenuName, i, rel_path)
         let g:BufMenuDict[file].bufmenu_linenr = i
         let i += 1
     endfor
 
-    call setbufvar(g:BufMenuName, '&modifiable', 0)
+    call setbufvar(s:BufMenuName, '&modifiable', 0)
 endfunction
 
 " Add a file to the menu.  Skip if duplicate.
@@ -247,7 +248,7 @@ function! BufMenuInit()
     call setwinvar(l:main_winid, s:BufMenuMainWinVar, v:true)
 
     let width = min([float2nr(&columns / 5), 80])
-    execute 'vertical topleft' width .. 'vsplit' g:BufMenuName
+    execute 'vertical topleft' width .. 'vsplit' s:BufMenuName
     let g:BufMenuWinID = win_getid()
     call setwinvar(g:BufMenuWinID, 'bufmenu_status', 'enabled')
     setlocal buftype=nofile bufhidden=wipe statusline=%q foldcolumn=0
