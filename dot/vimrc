@@ -341,11 +341,6 @@ augroup cplusplus
             nmap <LEADER>s :cs find s <C-R>=expand("<cword>")<CR><CR>
             nmap <LEADER>g :cs find g <C-R>=expand("<cword>")<CR><CR>
             nmap <LEADER>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-            nmap <LEADER>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-            nmap <LEADER>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-            nmap <LEADER>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-            nmap <LEADER>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-            nmap <LEADER>d :cs find d <C-R>=expand("<cword>")<CR><CR>
         endif
 
         " Support more C-related types
