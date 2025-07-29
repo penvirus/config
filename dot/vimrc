@@ -338,9 +338,12 @@ augroup cplusplus
         match Error100              /\%>100v.\+/ " highlight anything past 100 in red
 
         if has("cscope")
-            nmap <LEADER>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-            nmap <LEADER>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-            nmap <LEADER>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+            " Find this C symbol
+            nmap <LEADER>cs :cs find s <C-R>=expand("<cword>")<CR><CR>
+            " Find this definition
+            nmap <LEADER>cd :cs find g <C-R>=expand("<cword>")<CR><CR>
+            " Find functions calling this function
+            nmap <LEADER>cc :cs find c <C-R>=expand("<cword>")<CR><CR>
         endif
 
         " Support more C-related types
@@ -499,4 +502,4 @@ function! Cscope()
 
     execute 'wincmd h'
 endfunction
-nnoremap <LEADER>cs :call Cscope()<CR>
+nnoremap <LEADER>csi :call Cscope()<CR>
