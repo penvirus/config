@@ -23,7 +23,7 @@ function! FugitiveExitDiff()
 
             " Don't close buf menu's main window.  Otherwise, the whole vim
             " will be closed.
-            if win_getid(l:winnr) != g:BufMenuMainWinID
+            if win_getid(l:winnr) != BufMenuFindMainWinID()
                 execute l:winnr 'close'
             endif
         endfor
