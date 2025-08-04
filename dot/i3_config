@@ -153,6 +153,7 @@ bindsym $mod+b exec google-chrome-stable
 # screen lock
 # it looks weird, but just the key event my keyboard reports
 bindsym XF86AudioMedia exec i3lock
+bindsym $mod+0 exec i3lock
 
 # screen backlight
 bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl set +5%
