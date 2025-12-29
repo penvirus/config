@@ -471,6 +471,14 @@ augroup qf
     autocmd FileType qf call _qf()
 augroup END
 
+augroup RestoreCursor
+    autocmd!
+    " Save the view before leaving the buffer
+    autocmd BufLeave * let b:winview = winsaveview()
+    " Restore the view when entering the buffer
+    autocmd BufEnter * if exists('b:winview') | call winrestview(b:winview) | endif
+augroup END
+
 source ~/.vim/upstream.vim
 
 source ~/.vim/osc52.vim
