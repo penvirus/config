@@ -324,10 +324,12 @@ augroup cplusplus
         "set textwidth=78
 
         if has("gui_running")
+            hi Warn80          cterm=NONE ctermfg=79 ctermbg=60
             hi Error100        gui=NONE guifg=#ffffff guibg=#6e2e2e
             hi ErrorLeadSpace gui=NONE guifg=#ffffff guibg=#6e2e2e
             hi ErrorTailSpace gui=NONE guifg=#ffffff guibg=#6e2e2e
         else
+            hi Warn80          cterm=NONE ctermfg=79 ctermbg=60
             hi Error100        cterm=NONE ctermfg=79 ctermbg=32
             hi ErrorLeadSpace cterm=NONE ctermfg=79 ctermbg=33
             hi ErrorTailSpace cterm=NONE ctermfg=79 ctermbg=33
@@ -335,7 +337,8 @@ augroup cplusplus
 
         syntax match ErrorLeadSpace /^ \+/      " highlight any leading spaces
         syntax match ErrorTailSpace / \+$/      " highlight any trailing spaces
-        match Error100              /\%>100v.\+/ " highlight anything past 100 in red
+        match Warn80               /\%>80v.\+/ " highlight anything past 80
+        2match Error100              /\%>100v.\+/ " highlight anything past 100 in red
 
         if has("cscope")
             " Find this C symbol
