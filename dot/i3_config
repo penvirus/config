@@ -39,7 +39,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # Set auto-repeat
-exec_always --no-startup-id xset r rate 200 40
+exec_always --no-startup-id xset r rate 400 25
 
 # Set touchpad acceleration
 exec_always --no-startup-id xset m 22/10 0
