@@ -59,3 +59,5 @@ p() {
 for f in ${HOME}/bin/rcs/*\.sh; do
 	. "${f}"
 done
+
+setxkbmap -option ctrl:nocaps
