@@ -120,6 +120,8 @@ install_libinput_gestures()
 
 install_tmux()
 {
+	rm -rf "${HOME}/.tmux"
+	cp --preserve=all dot/tmux "${HOME}/.tmux"
 	cp --preserve=all dot/tmux.conf "${HOME}/.tmux.conf"
 }
 
