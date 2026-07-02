@@ -2,15 +2,6 @@
 
 platform=$(uname -s)
 
-install_jq()
-{
-	if [ "$platform" = "Linux" ]; then
-		ln -s "${HOME}/bin/jq-linux64" "${HOME}/bin/jq"
-	elif [ "$platform" = "Darwin" ]; then
-		ln -s "${HOME}/bin/jq-osx-amd64" "${HOME}/bin/jq"
-	fi
-}
-
 install_bashrc()
 {
 	if [ "$platform" = "Linux" ]; then
@@ -32,7 +23,6 @@ install_bin()
 	rm -rf "${HOME}/bin"
 	cp -r --preserve=all bin "${HOME}/bin"
 
-	install_jq
 	install_bashrc
 }
 
