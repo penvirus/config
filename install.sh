@@ -118,6 +118,11 @@ install_libinput_gestures()
 	cp --preserve=all dot/libinput-gestures.conf "${HOME}/.libinput-gestures.conf"
 }
 
+install_tmux()
+{
+	cp --preserve=all dot/tmux.conf "${HOME}/.tmux.conf"
+}
+
 install_known_tools()
 {
 	sudo apt update
