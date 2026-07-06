@@ -64,3 +64,5 @@
 [diff-so-fancy]
 	rulerWidth = 80
 	useUnicodeRuler = false
+[log]
+	mailmap = false
