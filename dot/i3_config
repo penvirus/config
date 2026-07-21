@@ -150,7 +150,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec i3-msg exit
 
 # start a browser
-bindsym $mod+b exec google-chrome-stable
+bindsym $mod+b exec env -u XDG_SESSION_TYPE google-chrome-stable
 
 # screen lock
 # it looks weird, but just the key event my keyboard reports
