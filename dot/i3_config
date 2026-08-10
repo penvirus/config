@@ -166,6 +166,11 @@ bindsym $mod+Shift+0 exec --no-startup-id $HOME/bin/display_mode.sh "standalone"
 bindsym $mod+Shift+9 exec --no-startup-id $HOME/bin/display_mode.sh "extended"
 bindsym $mod+Shift+8 exec --no-startup-id $HOME/bin/display_mode.sh "docked"
 
+# screen shot
+bindsym Print exec --no-startup-id maim "$HOME/Pictures/$(date +%Y%m%d_%H%M%S).png"
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "$HOME/Pictures/$(date +%Y%m%d_%H%M%S).png"
+bindsym Shift+Print exec --no-startup-id maim --select "$HOME/Pictures/$(date +%Y%m%d_%H%M%S).png"
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         bindsym $left resize shrink width 1 px or 1 ppt
