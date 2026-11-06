@@ -1,6 +1,7 @@
 # set   variable = value
 set tab-size = 8
 set diff-highlight = true
+set main-options = -n 1000
 
 # bind  keymap key action
 bind generic f move-page-down
