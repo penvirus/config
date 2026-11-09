@@ -111,7 +111,7 @@ install_libinput_gestures()
 install_tmux()
 {
 	rm -rf "${HOME}/.tmux"
-	cp --preserve=all dot/tmux "${HOME}/.tmux"
+	cp -r --preserve=all dot/tmux "${HOME}/.tmux"
 	cp --preserve=all dot/tmux.conf "${HOME}/.tmux.conf"
 }
 
@@ -137,6 +137,7 @@ distribute()
 	install_alacritty
 	install_touchpad
 	install_libinput_gestures
+	install_tmux
 
 	install_known_tools
 }
