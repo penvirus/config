@@ -28,7 +28,7 @@ case "$1" in
 		;;
 
 	"extended")
-		xrandr --output eDP --primary \
+		xrandr --output eDP --mode 2256x1504 --scale 1 --primary \
 			--output DisplayPort-1 --off \
 			--output DisplayPort-2 --mode 3840x2160 --scale 0.75 --left-of eDP
 
