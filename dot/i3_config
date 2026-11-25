@@ -161,12 +161,6 @@ bindsym $mod+0 exec i3lock
 bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl set +5%
 bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl set 5%-
 
-# display modes
-bindsym $mod+Shift+minus exec --no-startup-id $HOME/bin/display_mode.sh "external"
-bindsym $mod+Shift+0 exec --no-startup-id $HOME/bin/display_mode.sh "internal"
-bindsym $mod+Shift+9 exec --no-startup-id $HOME/bin/display_mode.sh "extended"
-bindsym $mod+Shift+8 exec --no-startup-id $HOME/bin/display_mode.sh "docked"
-
 # screen shot
 bindsym Print exec --no-startup-id maim "$HOME/Pictures/$(date +%Y%m%d_%H%M%S).png"
 bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "$HOME/Pictures/$(date +%Y%m%d_%H%M%S).png"
