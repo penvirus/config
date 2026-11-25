@@ -1,0 +1,18 @@
+#!/bin/sh
+# Reset outputs before autorandr resizes --fb to avoid RRSetScreenSize BadMatch.
+
+args=""
+
+# Turn off disconnected outputs (e.g. unplugged DP-2)
+for out in $(xrandr --query | awk '/ disconnected / { print $1 }'); do
+	args="$args --output $out --off"
+done
+
+# Clear --scale on active outputs (connected with an assigned geometry)
+for out in $(xrandr --query | awk '/ connected [0-9]/ { print $1 }'); do
+	args="$args --output $out --scale 1"
+done
+
+if [ -n "$args" ]; then
+	xrandr $args
+fi

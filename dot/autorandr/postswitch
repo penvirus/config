@@ -1,0 +1,20 @@
+#!/bin/sh
+case "$AUTORANDR_CURRENT_PROFILE" in
+    # eDP + DP-1 (primary)
+    docked0)
+        i3-msg "workspace 1, move workspace to output primary"
+        i3-msg "workspace 2, move workspace to output primary"
+        i3-msg "workspace 3, move workspace to output primary"
+        i3-msg "workspace 4, move workspace to output eDP"
+        ;;
+    # DP-1 (primary) + DP-2 
+    docked2)
+        i3-msg "workspace 1, move workspace to output primary"
+        i3-msg "workspace 2, move workspace to output primary"
+        i3-msg "workspace 3, move workspace to output primary"
+        i3-msg "workspace 4, move workspace to output DisplayPort-2"
+        ;;
+    *)
+        i3-msg "workspace 1, move workspace to output primary"
+        ;;
+esac

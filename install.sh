@@ -115,12 +115,19 @@ install_tmux()
 	cp --preserve=all dot/tmux.conf "${HOME}/.tmux.conf"
 }
 
+install_autorandr()
+{
+	rm -rf "${HOME}/.config/autorandr"
+	mkdir -p "${HOME}/.config"
+	cp -r --preserve=all dot/autorandr "${HOME}/.config/autorandr"
+}
+
 install_known_tools()
 {
 	sudo apt update
 	sudo apt install -y vim tmux tig mutt i3 alacritty brightnessctl \
 		pulseaudio-utils wmctrl xdotool libinput-tools ibus-libpinyin \
-		ripgrep cscope libssl-dev
+		ripgrep cscope libssl-dev autorandr
 }
 
 distribute()
@@ -138,6 +145,7 @@ distribute()
 	install_touchpad
 	install_libinput_gestures
 	install_tmux
+	install_autorandr
 
 	install_known_tools
 }
