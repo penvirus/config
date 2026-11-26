@@ -44,11 +44,8 @@ exec_always --no-startup-id xset r rate 400 25
 # Set touchpad acceleration
 exec_always --no-startup-id xset m 22/10 0
 
-# Map CAP to CTRL
-exec_always --no-startup-id setxkbmap -option ctrl:nocaps
-
-# Enable ibus
-exec_always --no-startup-id ibus-daemon -dr
+# Enable ibus, then map CAP to CTRL (after ibus initializes so it doesn't clobber XKB options)
+exec_always --no-startup-id sh -c 'ibus-daemon -dr && sleep 1 && setxkbmap -option ctrl:nocaps'
 
 # Enable libinput-gestures.
 exec_always --no-startup-id $HOME/bin/libinput-gestures/libinput-gestures -c $HOME/.libinput-gestures.conf
